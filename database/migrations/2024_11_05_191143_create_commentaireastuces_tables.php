@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Astuce;
+use App\Models\Categorie;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,6 +23,10 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Astuce::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
+        });
+        Schema::table('posts', function (Blueprint $blueprint) {
+            $blueprint->foreignIdFor(Categorie::class)->constrained()->cascadeOnDelete();
+
         });
     }
 

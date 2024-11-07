@@ -31,7 +31,8 @@ class Astuce extends Model
         return $this->belongsTo(Categorie::class, 'categorie_id');
     }
     public function imageUrlAstuce(){
-        return Storage::disk('public')->url($this->image); 
+        return $this->image ? asset('storage/' . $this->image) : null;
+        //return Storage::disk('public')->url($this->image); 
     }
 
 

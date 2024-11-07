@@ -22,7 +22,8 @@ class Post extends Model
         'etat'
     ];
     public function imageUrl(){
-        return Storage::disk('public')->url($this->image); 
+        return $this->image ? asset('storage/' . $this->image) : null;
+        //return Storage::disk('public')->url($this->image); 
     }
     public function category(){
         return $this->belongsTo(Categorie::class, 'categorie_id');

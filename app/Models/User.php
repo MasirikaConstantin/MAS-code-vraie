@@ -46,7 +46,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     public function imageUrls(){
-        return Storage::disk('public')->url($this->image); 
+        return $this->image ? asset('storage/' . $this->image) : null;
+        //return Storage::disk('public')->url($this->image); 
     }
 
     
