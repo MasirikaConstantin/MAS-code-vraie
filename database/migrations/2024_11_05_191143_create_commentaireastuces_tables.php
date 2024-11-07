@@ -24,6 +24,11 @@ return new class extends Migration
             $table->foreignIdFor(Astuce::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
+        
+
+
+
+
         Schema::table('posts', function (Blueprint $blueprint) {
             $blueprint->foreignIdFor(Categorie::class)->constrained()->cascadeOnDelete();
 
