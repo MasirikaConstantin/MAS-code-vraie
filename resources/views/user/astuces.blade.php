@@ -54,11 +54,13 @@ $count1=0;
                                 allowfullscreen>
                             </iframe>
                         </div>
-                    @elseif($astuce->image)
-                        <img src="{{$astuce->imageUrlAstuce()}}"
-                            class="w-full h-auto rounded-lg object-cover"
-                            alt="{{$astuce->titre}}">
+                   
                     @endif
+                    @if($astuce->image)
+                    <img src="{{$astuce->imageUrlAstuce()}}"
+                        class="w-full h-auto rounded-lg object-cover"
+                        alt="{{$astuce->titre}}">
+                        @endif
                 </div>
 
                 <!-- Contenu -->

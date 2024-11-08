@@ -1,31 +1,31 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-  <head><script src="{{asset('color-modes.js')}}"></script>
+  <head><script src="<?php echo e(asset('color-modes.js')); ?>"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>@yield('titre' ,env("APP_NAME"))</title>
+    <title><?php echo $__env->yieldContent('titre' ,env("APP_NAME")); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="{{asset('prism.css')}}">
-<link rel="stylesheet" href="{{asset('bootstrap-icons/bootstrap-icons.css')}}">
-<link rel="shortcut icon" href="{{asset('mas-product.ico')}}" type="image/x-icon">
-<link rel="stylesheet" href="{{asset('quill.snow.css')}}">
-<script src="{{asset('quill.js')}}"></script>
-<link rel="stylesheet" href="{{asset('tom-select.css')}}">
-<link rel="stylesheet" href="{{asset('autre.css')}}">
+<link rel="stylesheet" href="<?php echo e(asset('prism.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('bootstrap-icons/bootstrap-icons.css')); ?>">
+<link rel="shortcut icon" href="<?php echo e(asset('mas-product.ico')); ?>" type="image/x-icon">
+<link rel="stylesheet" href="<?php echo e(asset('quill.snow.css')); ?>">
+<script src="<?php echo e(asset('quill.js')); ?>"></script>
+<link rel="stylesheet" href="<?php echo e(asset('tom-select.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('autre.css')); ?>">
 
 
-<script src="{{asset('fancybox.umd.js')}}"></script>
+<script src="<?php echo e(asset('fancybox.umd.js')); ?>"></script>
 <link
   rel="stylesheet"
-  href="{{asset('fancybox.css')}}"
+  href="<?php echo e(asset('fancybox.css')); ?>"
 />
 
-<script src="{{asset('tom-select.complete.min.js')}}"></script>
+<script src="<?php echo e(asset('tom-select.complete.min.js')); ?>"></script>
 
 
 <meta name="theme-color" content="#712cf9">
@@ -35,7 +35,7 @@
                     
                       @font-face {
                         font-family: 'Google';
-                        src: url('{{asset('ProductSans-Light.ttf')}}');
+                        src: url('<?php echo e(asset('ProductSans-Light.ttf')); ?>');
                         font-weight: 500;
                         
                     }
@@ -113,11 +113,11 @@
 
   <body class="bg-gray-900 text-gray-100">
     
-    @php
+    <?php
     setlocale(LC_TIME,'fr_FR.utf8');
                             \Carbon\Carbon::setLocale('fr');
                             
-@endphp
+?>
 
 <script>
   Fancybox.bind("[data-fancybox]", {
@@ -127,13 +127,13 @@
 </script>
    
 
-@php
+<?php
   $route =request()->route()->getName();
-@endphp
+?>
 
     
 
-@include('nav')
+<?php echo $__env->make('nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
 <style>
@@ -146,7 +146,7 @@
           position:relative;
           margin-top: -80px;
           z-index: 9;
-          background: url({{asset('imagde.svg')}})  ;
+          background: url(<?php echo e(asset('imagde.svg')); ?>)  ;
         
           }
         
@@ -230,11 +230,11 @@
 <!-- Begin page content -->
 <main class="flex-shrink-0 mt-6 ">
 
-      @if (str_contains($route, 'index'))
+      <?php if(str_contains($route, 'index')): ?>
         <div class="class "  >
-            @if($route != 'astuces.new')
+            <?php if($route != 'astuces.new'): ?>
             <div class="  accs" style=" " >
-                @endif
+                <?php endif; ?>
                   <div class="col-md-12">
                     <div class=" sss text-body  justify-content-center acc mt-3 ">
                       <h1 class="h1 text-body" >
@@ -248,18 +248,18 @@
                   </div>
               </div>
             </div>
-            @endif
+            <?php endif; ?>
 
-          @if($route != 'astuces.new')
+          <?php if($route != 'astuces.new'): ?>
             
             <div class=" container mx-auto mt-6">
-          @endif
+          <?php endif; ?>
 
       <div class="mt-6" style="margin-top: 90px" >
-        <h1 class="text-4xl font-bold adrks:text-white mt-6 mb-4">@yield('section','')   </h1>
+        <h1 class="text-4xl font-bold adrks:text-white mt-6 mb-4"><?php echo $__env->yieldContent('section',''); ?>   </h1>
       </div>
 
-      @if(session("success1"))
+      <?php if(session("success1")): ?>
 
       <div id="successAlert" class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 adrks:bg-gray-800 adrks:text-green-400 adrks:border-green-800" role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -267,15 +267,16 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-          <span class="font-medium">Success alert!</span> {{ session('success') }}
+          <span class="font-medium">Success alert!</span> <?php echo e(session('success')); ?>
+
           <button type="button" onclick="this.parentElement.remove()" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 adrks:bg-green-600 adrks:hover:bg-green-700 adrks:focus:ring-green-800">X</button>
         </div>
       </div>
       
-      @endif
+      <?php endif; ?>
 
 
-          @yield('contenus')
+          <?php echo $__env->yieldContent('contenus'); ?>
 
 
 </main>
@@ -290,7 +291,7 @@
                         <i class="bi bi-info-circle mr-2"></i> À propos
                     </h3>
                     <div class="text-gray-400">
-                        Bienvenue sur <a href="/" class="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">{{__("mon-site")}}</a> !
+                        Bienvenue sur <a href="/" class="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500"><?php echo e(__("mon-site")); ?></a> !
                         <p class="mt-2">Nous sommes une plateforme en ligne dédiée à fournir des réponses claires et précises à vos questions, quelle que soit leur domaine.</p>
                     </div>
                     <button type="button" class="text-indigo-400 hover:text-indigo-300" onclick="document.getElementById('aboutModal').classList.remove('hidden')">
@@ -317,7 +318,7 @@
                         <div class="mt-6 text-gray-300 space-y-6">
                             <div>
                                 <p class="font-bold mb-2">À propos de nous : Votre guichet unique pour les questions et les réponses</p>
-                                <p>Bienvenue sur <span class="text-2xl text-indigo-400">{{__("mon-site")}}</span> !</p>
+                                <p>Bienvenue sur <span class="text-2xl text-indigo-400"><?php echo e(__("mon-site")); ?></span> !</p>
                             </div>
 
                             <div>
@@ -340,7 +341,7 @@
                             </div>
 
                             <div>
-                                <a href="{{route('login')}}" class="text-indigo-400 hover:text-indigo-300 font-bold">Rejoignez-nous !</a>
+                                <a href="<?php echo e(route('login')); ?>" class="text-indigo-400 hover:text-indigo-300 font-bold">Rejoignez-nous !</a>
                                 <p class="mt-4">Ensemble, construisons un monde où la connaissance est accessible à tous !</p>
                             </div>
                         </div>
@@ -376,8 +377,8 @@
                     <!-- Formulaire de contact -->
                     <div class="mt-8">
                         <h3 class="text-indigo-400 font-bold mb-4">Contactez-nous</h3>
-                        <form id="contactForm" class="space-y-4" action="{{ route('contacts') }}" method="POST">
-                          @csrf
+                        <form id="contactForm" class="space-y-4" action="<?php echo e(route('contacts')); ?>" method="POST">
+                          <?php echo csrf_field(); ?>
                           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                               <div>
                                   <label for="name" class="block text-sm font-medium text-gray-400">Nom</label>
@@ -428,10 +429,10 @@
                             const formData = new FormData(this);
                     
                             try {
-                                const response = await fetch("{{ route('contacts') }}", {
+                                const response = await fetch("<?php echo e(route('contacts')); ?>", {
                                     method: "POST",
                                     headers: {
-                                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                        "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
                                     },
                                     body: formData
                                 });
@@ -539,8 +540,8 @@
   }, 5000);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-<script src="{{asset('prism.js')}}"></script>
-<script src="{{asset('quill.js')}}"></script>
+<script src="<?php echo e(asset('prism.js')); ?>"></script>
+<script src="<?php echo e(asset('quill.js')); ?>"></script>
 
 
     </body>
@@ -570,3 +571,4 @@
 
     
 </html>
+<?php /**PATH /home/masirika-constantin/Vidéos/Mas-Code/resources/views/base.blade.php ENDPATH**/ ?>

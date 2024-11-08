@@ -1,6 +1,4 @@
-@extends('base')
-
-@section('contenus')
+<?php $__env->startSection('contenus'); ?>
 
 <section class="pt-4 linear-g-w-2" >
 
@@ -125,50 +123,54 @@
 <div class="container mx-auto px-4">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
-        @foreach ($astuces as $astuce)
-            @php
+        <?php $__currentLoopData = $astuces; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $astuce): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php
                 $titre = str_replace(' ', '-', $astuce->slug);
               //echo( $astuce->imageUrlAstuce() );
-            @endphp
+            ?>
             
                   <!-- Card 1 -->
-                  <a href="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" 
+                  <a href="<?php echo e(route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id])); ?>" 
                      class="block group relative h-[280px] bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
                       <!-- Category Badge -->
                       <div class="absolute top-3 left-3 z-10">
                           <span class="px-3 py-1 text-xs font-semibold bg-indigo-500/30 text-indigo-300 rounded-full backdrop-blur-sm">
                               <i class="fas fa-folder mr-1"></i>
-                              {{ $astuce->category->titre }}
+                              <?php echo e($astuce->category->titre); ?>
+
                           </span>
                       </div>
           
                       <!-- Image Container -->
-                      @if($astuce->image)
+                      <?php if($astuce->image): ?>
                       <div class="h-32 overflow-hidden">
                           <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" 
-                               src="{{ $astuce->imageUrlAstuce() }}" 
+                               src="<?php echo e($astuce->imageUrlAstuce()); ?>" 
                                alt="Cover">
                       </div>
-                      @else
+                      <?php else: ?>
                       
                       <!-- Fallback Container -->
                       <div class="h-32 bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center">
                           <div class="text-center">
                               <div class="w-12 h-12 mx-auto">
-                                  {!! $astuce->category->svg !!}
+                                  <?php echo $astuce->category->svg; ?>
+
                               </div>
-                              <h3 class="text-sm font-bold text-white mt-2">{{ $astuce->category->titre }}</h3>
+                              <h3 class="text-sm font-bold text-white mt-2"><?php echo e($astuce->category->titre); ?></h3>
                           </div>
                       </div>
-                      @endif
+                      <?php endif; ?>
           
                       <!-- Content -->
                       <div class="p-4">
                           <h2 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors mb-2 line-clamp-2">
-                              {{ $astuce->titre }}
+                              <?php echo e($astuce->titre); ?>
+
                           </h2>
                           <p class="text-slate-300 text-sm line-clamp-3">
-                            {{Str::limit($astuce->contenus,76)}}
+                            <?php echo e(Str::limit($astuce->contenus,76)); ?>
+
 
                           </p>
           
@@ -178,7 +180,7 @@
                                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                   </svg>
-                                  <span class="text-xs">{{ $astuce->created_at->diffForHumans() }}</span>
+                                  <span class="text-xs"><?php echo e($astuce->created_at->diffForHumans()); ?></span>
                               </div>
                               
                               <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
@@ -191,7 +193,7 @@
                   </a>
           
   
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
     </div>
     </div>
@@ -204,7 +206,7 @@
 
       <div class="container mx-auto" >
 
-        <a href="{{route('astuces')}}"  class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
+        <a href="<?php echo e(route('astuces')); ?>"  class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
           <svg class="w-6 h-6 text-gray-800 adrks:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
             <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -213,7 +215,7 @@
           Voir toutes les astuces
         </a>
 
-        <a href="{{route('astuces.new')}}" class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
+        <a href="<?php echo e(route('astuces.new')); ?>" class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
           
           <svg class="w-6 h-6 text-gray-800 adrks:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -236,53 +238,57 @@
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
-      @foreach ($posts as $post )
-        @php
+      <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php
           $titre= str_replace(' ','-',$post->slug)
-        @endphp
+        ?>
       
 
 
 
 
         <!-- Card 1 -->
-        <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}"
+        <a href="<?php echo e(route('user.show',['nom'=>Str::lower($titre),'post'=>$post])); ?>"
           class="block group relative h-[280px] bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
            <!-- Category Badge -->
            <div class="absolute top-3 left-3 z-10">
                <span class="px-3 py-1 text-xs font-semibold bg-indigo-500/30 text-indigo-300 rounded-full backdrop-blur-sm">
                    <i class="fas fa-folder mr-1"></i>
-                   {{ $post->category->titre }}
+                   <?php echo e($post->category->titre); ?>
+
                </span>
            </div>
 
            <!-- Image Container -->
-           @if($post->image)
+           <?php if($post->image): ?>
            <div class="h-32 overflow-hidden">
                <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" 
-                    src="{{ $post->imageUrl() }}" 
+                    src="<?php echo e($post->imageUrl()); ?>" 
                     alt="Cover">
            </div>
-           @else
+           <?php else: ?>
            
            <!-- Fallback Container -->
            <div class="h-32 bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center">
                <div class="text-center">
                    <div class="w-12 h-12 mx-auto">
-                       {!! $post->category->svg !!}
+                       <?php echo $post->category->svg; ?>
+
                    </div>
-                   <h3 class="text-sm font-bold text-white mt-2">{{ $post->category->titre }}</h3>
+                   <h3 class="text-sm font-bold text-white mt-2"><?php echo e($post->category->titre); ?></h3>
                </div>
            </div>
-           @endif
+           <?php endif; ?>
 
            <!-- Content -->
            <div class="p-4">
                <h2 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors mb-2 line-clamp-2">
-                   {{ $post->titre }}
+                   <?php echo e($post->titre); ?>
+
                </h2>
                <p class="text-slate-300 text-sm line-clamp-3">
-                   {{ substr($post->contenus, 0, 76) }}
+                   <?php echo e(substr($post->contenus, 0, 76)); ?>
+
                </p>
 
                <!-- Footer -->
@@ -291,7 +297,7 @@
                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                        </svg>
-                       <span class="text-xs">{{ $post->created_at->diffForHumans() }}</span>
+                       <span class="text-xs"><?php echo e($post->created_at->diffForHumans()); ?></span>
                    </div>
                    
                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
@@ -303,7 +309,7 @@
            </div>
        </a>
 
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       
 
       
@@ -313,7 +319,7 @@
       <div class="d-sm-block" >
 
         
-        <a href="{{route('user.accueil')}}"  class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
+        <a href="<?php echo e(route('user.accueil')); ?>"  class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
           <svg class="w-6 h-6 text-gray-800 adrks:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
             <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -322,7 +328,7 @@
           Voir  le Forum
         </a>
 
-        <a href="{{route('user.newpost')}}" class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
+        <a href="<?php echo e(route('user.newpost')); ?>" class="text-gray-900 mt-5 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-500 me-2 mb-2">
           
           <svg class="w-6 h-6 text-gray-800 adrks:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -341,16 +347,17 @@
 
       <h1 class="text-4xl font-bold adrks:text-white mb-4" > <i class="bi bi-sliders"></i> Nos sujets</h1>
 
-      @foreach ($categories as $category )
-        <a type="button" href="{{route('tous',['category_id' => $category->id])}}" title="{{$category->titre}}" data-bs-content="{{$category->description}}" data-bs-placement="top" data-bs-trigger="hover" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-600 adrks:bg-gray-800 adrks:border-gray-700 adrks:text-white adrks:hover:bg-gray-700 me-2 mb-2">
+      <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <a type="button" href="<?php echo e(route('tous',['category_id' => $category->id])); ?>" title="<?php echo e($category->titre); ?>" data-bs-content="<?php echo e($category->description); ?>" data-bs-placement="top" data-bs-trigger="hover" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center adrks:focus:ring-gray-600 adrks:bg-gray-800 adrks:border-gray-700 adrks:text-white adrks:hover:bg-gray-700 me-2 mb-2">
           <div class="w-6 h-5 me-2 -ms-1">
-            @php
+            <?php
               echo $category->svg
-            @endphp
+            ?>
           </div>
-          {{$category->titre}}
+          <?php echo e($category->titre); ?>
+
         </a>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
   </section>
 
@@ -365,11 +372,11 @@
 
 
 <!-- Bootstrap, axios, lazysizes, ... -->
-<script src="{{asset("app.js")}}" ></script>
+<script src="<?php echo e(asset("app.js")); ?>" ></script>
 
 
 <!-- Livewire -->
-<script src="{{asset('livewire.js')}}" data-turbo-eval="false" data-turbolinks-eval="false" ></script><script data-turbo-eval="false" data-turbolinks-eval="false" >window.livewire = new Livewire();window.Livewire = window.livewire;window.livewire_app_url = '';window.livewire_token = 'mClbj92Nm5pHeNwzRYgleY2F3MxeaRdEWqd6F1tl';window.deferLoadingAlpine = function (callback) {window.addEventListener('livewire:load', function () {callback();});};let started = false;window.addEventListener('alpine:initializing', function () {if (! started) {window.livewire.start();started = true;}});document.addEventListener("DOMContentLoaded", function () {if (! started) {window.livewire.start();started = true;}});</script>
+<script src="<?php echo e(asset('livewire.js')); ?>" data-turbo-eval="false" data-turbolinks-eval="false" ></script><script data-turbo-eval="false" data-turbolinks-eval="false" >window.livewire = new Livewire();window.Livewire = window.livewire;window.livewire_app_url = '';window.livewire_token = 'mClbj92Nm5pHeNwzRYgleY2F3MxeaRdEWqd6F1tl';window.deferLoadingAlpine = function (callback) {window.addEventListener('livewire:load', function () {callback();});};let started = false;window.addEventListener('alpine:initializing', function () {if (! started) {window.livewire.start();started = true;}});document.addEventListener("DOMContentLoaded", function () {if (! started) {window.livewire.start();started = true;}});</script>
 
 <script type="text/javascript">
 
@@ -398,4 +405,5 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/masirika-constantin/Vidéos/Mas-Code/resources/views/index.blade.php ENDPATH**/ ?>

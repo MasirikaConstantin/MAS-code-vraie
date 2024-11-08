@@ -1,0 +1,1 @@
+<img class="w-20 h-20 fill-current text-gray-500" src="<?php echo e(asset('mas product.png')); ?>" alt="" srcset=""><?php /**PATH /home/masirika-constantin/Vidéos/Mas-Code/resources/views/components/application-logo.blade.php ENDPATH**/ ?>

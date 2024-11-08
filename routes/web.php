@@ -12,16 +12,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     //dd(Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get());
@@ -40,9 +31,9 @@ Route::get('/astuces', [AstucesControllers::class,'index'])->name('astuces');
 
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard' ,[UserControl::class ,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard' ,[UserControl::class ,'dashboard'])->middleware(['rolemanager:utilisateur', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('rolemanager:utilisateur')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -69,7 +60,7 @@ Route::prefix('user')->name('user.')->controller(UserControl::class)->group(func
     })->name('accueil');
 
 
-    Route::get('/newpost', 'newpost')->middleware(['auth', 'verified'])->name('newpost');
+    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur', 'verified'])->name('newpost');
     Route::post('/newpost', 'save');
 
     Route::get('/{post}/modifier','modifier')->name('modif');
@@ -121,7 +112,7 @@ Route::put('/profile', [UserControl::class, 'profil'])->name('photo');
 
 
 require __DIR__.'/adminauth.php';
-Route::prefix('/admin')->controller(AdminControl::class)->name('admin.')->middleware(['auth:admin', 'verified'])->group( function () {
+Route::prefix('/admin')->controller(AdminControl::class)->name('admin.')->middleware(['rolemanager:admin', 'verified'])->group( function () {
     Route::get('/dashboard','dashboard')->name('dashboard');
 
     Route::get('/cat','newcat')->name('newcat');
@@ -153,7 +144,7 @@ Route::get('/user/contact', [UserControl::class])->name('contact1');
 Route::post('/user/{post}/contact', [UserControl::class,'contact'])->name('user.contact');
 
 
-Route::prefix('astuces')->name('astuces.')->middleware('auth')->controller(AstucesControllers::class)->group(function (){
+Route::prefix('astuces')->name('astuces.')->middleware('rolemanager:admin')->controller(AstucesControllers::class)->group(function (){
 
 
     Route::get('/new','create')->name('new');
