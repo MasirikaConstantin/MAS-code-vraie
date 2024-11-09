@@ -29,10 +29,6 @@ return new class extends Migration
 
 
 
-        Schema::table('posts', function (Blueprint $blueprint) {
-            $blueprint->foreignIdFor(Categorie::class)->constrained()->cascadeOnDelete();
-
-        });
     }
 
     /**
