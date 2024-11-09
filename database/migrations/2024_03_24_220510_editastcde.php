@@ -12,10 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table("astuces", function(Blueprint $table){
+        /*Schema::table("astuces", function(Blueprint $table){
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
 
-        });
+        });*/
     }
 
     /**
