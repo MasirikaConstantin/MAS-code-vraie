@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('blog.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mascodep/public_html/blog.mascodeproduct.com/site/resources/views/blog/index.blade.php ENDPATH**/ ?>
