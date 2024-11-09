@@ -13,7 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table("astuces", function(Blueprint $table){
-            $table->foreignIdFor(Categorie::class)->constrained()->cascadeOnDelete();
 
         });
     }
