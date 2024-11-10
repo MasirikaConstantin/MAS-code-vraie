@@ -6,7 +6,8 @@
   $count1=0;
   $count="0";
   date_default_timezone_set('Europe/Paris');
-
+setlocale(LC_TIME,'fr_FR.utf8');
+  \Carbon\Carbon::setLocale('fr');
 @endphp
 @if (session('success'))
 <div class="alert alert-success">

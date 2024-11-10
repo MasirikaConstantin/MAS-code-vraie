@@ -18,7 +18,7 @@
                 <a href="{{route('admin.gerer',['id'=>$astuce])}}" class="btn btn-primary">Administrer</a>
                 </div>
                 <div class="card-footer text-muted">
-                2 days ago
+                {{ $astuce->created_at->diffForHumans() }}
                 </div>
             </div>
         </div>
