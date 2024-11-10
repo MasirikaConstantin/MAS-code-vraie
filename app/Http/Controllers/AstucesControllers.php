@@ -88,7 +88,7 @@ class AstucesControllers extends Controller
             
     //    dd($videos);
 
-    return redirect()->route('dashboard');
+    return redirect()->route('dashboard')->with("success","Astuce Créer avec succes");
         //return view ('astuces.mesastuces',['astuces.newastuce'=>'newastuces']);
         
     }

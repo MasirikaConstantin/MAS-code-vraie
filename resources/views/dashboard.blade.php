@@ -32,6 +32,11 @@ $k=0;
 </head>
 <body class="bg-gray-900 text-gray-100">
     <div class="container mx-auto px-4 py-8">
+        @if (session('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Alert</span> {{ session('success') }}.
+          </div>
+        @endif
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Profil Section -->
             <div class="lg:col-span-1">
