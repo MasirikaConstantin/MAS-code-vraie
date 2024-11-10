@@ -144,7 +144,7 @@ Route::get('/user/contact', [UserControl::class])->name('contact1');
 Route::post('/user/{post}/contact', [UserControl::class,'contact'])->name('user.contact');
 
 
-Route::prefix('astuces')->name('astuces.')->middleware('rolemanager:admin')->controller(AstucesControllers::class)->group(function (){
+Route::prefix('astuces')->name('astuces.')->middleware('rolemanager:utilisateur')->controller(AstucesControllers::class)->group(function (){
 
 
     Route::get('/new','create')->name('new');
