@@ -420,7 +420,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
                 
                   
                   <p class="text-gray-200" >
-                    {{!! comm->contenus!!}}
+                    {{!! $comm->contenus!!}}
       
                         @if ($comm->codesource)
                           <pre style="" class="border border-5  mt-5 " ><code class="{{$class}}">{{!! comm->codesource !!}}</code></pre>
