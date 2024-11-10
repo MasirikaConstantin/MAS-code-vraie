@@ -156,6 +156,21 @@
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
+                <small>
+                    Avant de publier votre code s'il contient du code source veillez le prévisualiser
+                </small>
+				<div class="invalid-feedback">
+				
+				</div>
+				<div class="">
+						<small>
+							Pour la <strong>surbrillance des codes sources</strong> utiliser cette exemple dans votre contenus
+						</small>
+					<pre style="" class="border border-1 language-html" tabindex="0" style="padding: 2px !important" ><code class="b language-html"><span class="token operator">&lt;</span>pre<span class="token operator"><span class="token operator">&gt;</span><span class="token operator">&lt;</span>code <span class="token keyword">class</span><span class="token operator">=</span><span class="token string double-quoted-string">"language-Nom_langage"</span><span class="token operator">&gt;</span>Votre Contenus <span class="token operator">&lt;</span><span class="token operator">/code<span class="token keyword"><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>pre<span class="token operator">&gt;</span></code></pre>
+
+
+					
+				</div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
@@ -201,7 +216,7 @@
                            id="video"
                            name="video"
                            value="{{ old('video', $astuce->video) }}"
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                           class="mt-1 block w-full text-gray-900 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                            placeholder="https://www.youtube.com/watch?v=...">
                     @error('video')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
