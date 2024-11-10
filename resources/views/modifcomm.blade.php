@@ -48,7 +48,7 @@
         <p class="mt-4 text-lg text-gray-200 font-semibold">{{!! $comment->contenus !!}}</p>
 
         @if ($comment->codesource)
-        <pre class="border border-gray-300 bg-gray-50 p-4 mt-5 rounded-md shadow-inner overflow-x-auto"><code class="{{ $class }}">{{!! $comment->codesource!! }}</code></pre>
+        <pre class="border border-gray-300 bg-gray-50 p-4 mt-5 rounded-md shadow-inner overflow-x-auto"><code class="{{ $class }}">{{!! $comment->codesource !!}}</code></pre>
         @endif
 
         <hr class="my-4 border-gray-200">
