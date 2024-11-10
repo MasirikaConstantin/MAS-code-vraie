@@ -67,6 +67,10 @@ $count1=0;
                 <div class="prose prose-invert max-w-none">
                     {!! $astuce->contenus !!}
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Métadonnées -->
                 <div class="mt-8 bg-slate-800 rounded-lg p-6 space-y-4">
