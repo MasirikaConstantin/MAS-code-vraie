@@ -5,6 +5,8 @@
 @php
   $count1=0;
   $count="0";
+  date_default_timezone_set('Europe/Paris');
+
 @endphp
 @if (session('success'))
 <div class="alert alert-success">
