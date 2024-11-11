@@ -161,7 +161,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
             <figcaption>Digital art by Anonymous</figcaption>
         </figure>
           @endif
-          <p class="lead">{{!! $post->contenus !!}}</p>
+          <p class="lead">{!! $post->contenus !!}</p>
           <p>
                 @if ($post->codesource)
                   <pre style="" class="border border-5  mt-5 " ><code class="{{$class}}">{{($post->codesource)}}</code></pre>

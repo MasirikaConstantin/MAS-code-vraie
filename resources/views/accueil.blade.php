@@ -35,7 +35,7 @@
             <div class="flex-1">
                 <a href="{{route('user.show',['nom'=>Str::lower($titre1),'post'=>$recent])}}" class="block hover:text-blue-600 transition">
                     <h3 class="font-semibold text-gray-300">{{$recent->users->name}}</h3>
-                              <p class="text-gray-100 mt-1"> {{Str::limit($recent->contenus,200)}} </p>
+                              <p class="text-gray-100 mt-1"> {!Str::limit($recent->contenus,200)!} </p>
                 </a>
             </div>
         </div>
