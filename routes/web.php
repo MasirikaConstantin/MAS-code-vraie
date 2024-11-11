@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    //dd(Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get());
     return view('index',[
         'posts'=>Post::paginate(6)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
         'astuces'=>Astuce::orderBy('id','desc')->where('etat',true)->paginate(6),
@@ -24,7 +23,9 @@ Route::get('/', function () {
 })->name('index');
 
 
-
+Route::get('/contact', function (){
+    return view("contact");
+})->name("contact");
 
 
 Route::get('/astuces', [AstucesControllers::class,'index'])->name('astuces');

@@ -374,93 +374,97 @@
                     </div>
 
                     <!-- Formulaire de contact -->
+                    @if (str_contains($route, 'contact'))
+                    @else
+
                     <div class="mt-8">
-                        <h3 class="text-indigo-400 font-bold mb-4">Contactez-nous</h3>
-                        <form id="contactForm" class="space-y-4" action="{{ route('contacts') }}" method="POST">
-                          @csrf
-                          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <div>
-                                  <label for="name" class="block text-sm font-medium text-gray-400">Nom</label>
-                                  <input type="text" id="name" name="nom" value="" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
-                                      <p class="mt-1 text-sm text-red-600">Min 4 :</p>
-                              </div>
-                              <div>
-                                  <label for="email" class="block text-sm font-medium text-gray-400">Email</label>
-                                  <input type="email" id="email" name="email" value="" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
-                                      <p class="mt-1 text-sm text-red-600">Email Valide</p>
-                              </div>
-                          </div>
-                          <div>
-                              <label for="message" class="block text-sm font-medium text-gray-400">Message</label>
-                              <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                                  <p class="mt-1 text-sm text-red-600">Min 10 :</p>
-                          </div>
-                          <button type="submit" class="w-full md:w-auto px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-                              Envoyer
-                          </button>
-                      </form>
-                      
-                      <script>
-                        document.getElementById('contactForm').addEventListener('submit', async function(event) {
-                            event.preventDefault(); // Empêche le rechargement de la page
-                            
-                            // Récupère les valeurs des champs du formulaire
-                            const name = document.getElementById('name').value.trim();
-                            const email = document.getElementById('email').value.trim();
-                            const message = document.getElementById('message').value.trim();
+                      <h3 class="text-indigo-400 font-bold mb-4">Contactez-nous</h3>
+                      <form id="contactForm" class="space-y-4" action="{{ route('contacts') }}" method="POST">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400">Nom</label>
+                                <input type="text" id="name" name="nom" value="" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                                    <p class="mt-1 text-sm text-red-600">Min 4 :</p>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400">Email</label>
+                                <input type="email" id="email" name="email" value="" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                                    <p class="mt-1 text-sm text-red-600">Email Valide</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-400">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                <p class="mt-1 text-sm text-red-600">Min 10 :</p>
+                        </div>
+                        <button type="submit" class="w-full md:w-auto px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                            Envoyer
+                        </button>
+                    </form>
                     
-                            // Vérifie la longueur du nom et du message, et la validité de l'email
-                            if (name.length < 4) {
-                                alert("Le nom doit contenir au moins 4 caractères.");
-                                return;
-                            }
-                            if (message.length < 10) {
-                                alert("Le message doit contenir au moins 10 caractères.");
-                                return;
-                            }
-                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                            if (!emailPattern.test(email)) {
-                                alert("Veuillez entrer une adresse email valide.");
-                                return;
-                            }
+                    <script>
+                      document.getElementById('contactForm').addEventListener('submit', async function(event) {
+                          event.preventDefault(); // Empêche le rechargement de la page
+                          
+                          // Récupère les valeurs des champs du formulaire
+                          const name = document.getElementById('name').value.trim();
+                          const email = document.getElementById('email').value.trim();
+                          const message = document.getElementById('message').value.trim();
+                  
+                          // Vérifie la longueur du nom et du message, et la validité de l'email
+                          if (name.length < 4) {
+                              alert("Le nom doit contenir au moins 4 caractères.");
+                              return;
+                          }
+                          if (message.length < 10) {
+                              alert("Le message doit contenir au moins 10 caractères.");
+                              return;
+                          }
+                          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                          if (!emailPattern.test(email)) {
+                              alert("Veuillez entrer une adresse email valide.");
+                              return;
+                          }
+                  
+                          // Si les validations passent, prépare l'envoi du formulaire
+                          const formData = new FormData(this);
+                  
+                          try {
+                              const response = await fetch("{{ route('contacts') }}", {
+                                  method: "POST",
+                                  headers: {
+                                      "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                  },
+                                  body: formData
+                              });
+                  
+                              if (response.ok) {
+                                  // Vérifie si le contenu est JSON
+                                  const contentType = response.headers.get("content-type");
+                                  if (contentType && contentType.includes("application/json")) {
+                                      const data = await response.json();
+                                      alert('Formulaire envoyé avec succès !');
+                                  } else {
+                                      alert('Votre message a été bien envoyé.');
+                                  }
+                              } else {
+                                  // Affiche les erreurs de validation ou un statut HTTP non "ok"
+                                  const errors = await response.json();
+                                  console.log(errors);
+                                  alert('Erreur lors de l\'envoi du formulaire.');
+                              }
+                          } catch (error) {
+                              console.error('Erreur de soumission :', error);
+                              alert('Une erreur est survenue lors de l\'envoi.');
+                          }
+                      });
+                  </script>
+                  
+                  
                     
-                            // Si les validations passent, prépare l'envoi du formulaire
-                            const formData = new FormData(this);
-                    
-                            try {
-                                const response = await fetch("{{ route('contacts') }}", {
-                                    method: "POST",
-                                    headers: {
-                                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                                    },
-                                    body: formData
-                                });
-                    
-                                if (response.ok) {
-                                    // Vérifie si le contenu est JSON
-                                    const contentType = response.headers.get("content-type");
-                                    if (contentType && contentType.includes("application/json")) {
-                                        const data = await response.json();
-                                        alert('Formulaire envoyé avec succès !');
-                                    } else {
-                                        alert('Votre message a été bien envoyé.');
-                                    }
-                                } else {
-                                    // Affiche les erreurs de validation ou un statut HTTP non "ok"
-                                    const errors = await response.json();
-                                    console.log(errors);
-                                    alert('Erreur lors de l\'envoi du formulaire.');
-                                }
-                            } catch (error) {
-                                console.error('Erreur de soumission :', error);
-                                alert('Une erreur est survenue lors de l\'envoi.');
-                            }
-                        });
-                    </script>
-                    
-                    
-                      
-                    </div>
+                  </div>
+                  @endif
                 </div>
             </div>
         </div>
