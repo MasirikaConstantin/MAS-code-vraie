@@ -168,7 +168,7 @@
                               {{ $astuce->titre }}
                           </h2>
                           <p class="text-slate-300 text-sm line-clamp-3">
-                            {{Str::limit($astuce->contenus,76)}}
+                            {{Str::limit($astuce->description,76)}}
 
                           </p>
           
