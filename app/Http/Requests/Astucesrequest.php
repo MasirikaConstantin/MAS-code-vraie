@@ -46,7 +46,7 @@ class Astucesrequest extends FormRequest
     */
     protected function prepareForValidation(){
         $this->merge([
-            'slug' => $this->input('slug') ?: Str::slug($this->input('titre') . '-' . Carbon::now()->format('Y-m-d-H-i-s'))
+            'slug' => $this->input('slug') ?: Str::slug($this->input('titre') . '-' . Carbon::now()->format('H-i-s'))
     
             ]);
     }
