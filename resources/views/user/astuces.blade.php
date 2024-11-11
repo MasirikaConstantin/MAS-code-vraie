@@ -46,14 +46,14 @@ $count1=0;
                     <h3>{{session('success')}}</h3>
                 </div>
               @endif
-                <div class="mb-8">
+                <div class="mb-8 min-h-full">
                     @if($astuce->video)
-                        <div class="aspect-w-16 aspect-h-9">
-                            <iframe class="w-full h-full rounded-lg"
-                                src="{{$astuce->video}}"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
+                           <div class="h-96" >
+                            <iframe  class="h-96 w-full" 
+                            src="{{$astuce->video}}"
+                            allowfullscreen>
+                        </iframe>
+                           </div>
                    
                     @endif
                     @if($astuce->image)
