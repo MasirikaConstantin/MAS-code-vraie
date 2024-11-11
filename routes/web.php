@@ -133,6 +133,8 @@ Route::prefix('/admin')->controller(AdminControl::class)->name('admin.')->middle
     Route::get('/gereastuce/{id}/','gestion')->name('gerer');
 
     Route::get('/delete/{astuce}-{donnee}','editastuce')->name('gereredit');
+    Route::get('/user-st/{user}','gestionuser')->name('gestionuser');
+
 
 
 

@@ -212,5 +212,11 @@ class AdminControl extends Controller
     return back()->with('success','Modification faite avec succes');
 
     }
-    
+
+    public function gestionuser(User $user){
+        $commentCount = $user->com->count();
+        //dd($commentCount);
+        return view("admin.gereruser",["user"=>$user,"comments"=>$commentCount,"posts" => $user->posts()->orderByDesc('created_at')->paginate(5)]);
+
+    }
 }
