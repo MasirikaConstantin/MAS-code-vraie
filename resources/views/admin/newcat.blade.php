@@ -1,116 +1,76 @@
 @extends('admin.base')
-@section('section',$category->exists ? 'Editer une  Categorie' :'Créer une Categorie')
+@section('section',$category->exists ? 'Editer une Categorie' :'Créer une Categorie')
 @section('titre', $category->exists ? 'Editer une Categorie' :'Créer une Categorie')
 @section('contenus')
 
-
-  <form action="{{route($category->exists ? 'admin.editcat': 'admin.newcat', $category)}}" method="post" enctype="multipart/form-data" >
-    @csrf
-  
-    <div class="form-floating mb-3">
-      <input type="text" name="titre" class="form-control" id="floatingInput" value="{{old('titre',$category->titre)}}" >
-      <label for="floatingInput">Titre</label>
-      @error('titre')
-        <div class="alert alert-danger mt-2">
-            {{$message}}
-        </div>
-    @enderror
-    </div>
-
-    <div class="form-floating mt-2 ">
-      <select @selected(old($category->couleur)) class="form-select" name="couleur" id="floatingSelect" aria-label="Floating label select example">
-        <option  @selected(old('couleur', $category->couleur)) value="primary" >Bleu</option>
-        <option  @selected(old('couleur', $category->couleur)) value="light">Blanche</option>
-        <option  @selected(old('couleur', $category->couleur)) value="secondary">Gris</option>
-        <option  @selected(old('couleur', $category->couleur)) value="success">Verte</option>
-        <option  @selected(old('couleur', $category->couleur)) value="info">Blue claire</option>
-        <option  @selected(old('couleur', $category->couleur)) value="warning">Jaune</option>
-        <option  @selected(old('couleur', $category->couleur)) value="danger">Rouge</option>
-        <option  @selected(old('couleur', $category->couleur)) value="dark">Noire</option>
-
-      </select>
-      <label for="floatingSelect">Selectionner une couleur</label>
-    </div>
-    @error('couleur')
-        <div class="alert alert-danger mt-2">
-            {{$message}}
-        </div>
-    @enderror
-
-
-    <div class="row align-items-md-stretch mb-3">
-      <div class="col-md-6">
-          <label for="validationDefault03" class="form-label">Photo(si possible)</label>
-          <input type="file" name="image" class="form-control"  id='fileUpload'/>
+<div class="min-h-screen bg-gray-900 py-8">
+  <div class="max-w-4xl mx-auto px-4">
+    <form action="{{route($category->exists ? 'admin.editcat': 'admin.newcat', $category)}}" method="post" enctype="multipart/form-data" class="space-y-6 bg-gray-800 p-8 rounded-2xl shadow-xl backdrop-blur-lg border border-gray-700">
+      @csrf
+      
+      <div class="relative">
+        <input type="text" name="titre" id="titre" value="{{old('titre',$category->titre)}}" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200 peer placeholder-transparent">
+        <label for="titre" class="absolute left-4 -top-2.5 bg-gray-800 px-2 text-sm text-gray-400 transition-all peer-placeholder-shown:top-3 peer-focus:-top-2.5">Titre</label>
+        @error('titre')
+          <div class="mt-2 text-red-500 text-sm">{{$message}}</div>
+        @enderror
       </div>
-      <div class="col-md-6 img-c" >
-          <img id='imageDiv' class="h-s100" style="width: 320px; height: 200px;"  />
+
+      <div class="relative">
+        <select name="couleur" id="couleur" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200">
+          <option @selected(old('couleur', $category->couleur)) value="primary">Bleu</option>
+          <option @selected(old('couleur', $category->couleur)) value="light">Blanche</option>
+          <option @selected(old('couleur', $category->couleur)) value="secondary">Gris</option>
+          <option @selected(old('couleur', $category->couleur)) value="success">Verte</option>
+          <option @selected(old('couleur', $category->couleur)) value="info">Blue claire</option>
+          <option @selected(old('couleur', $category->couleur)) value="warning">Jaune</option>
+          <option @selected(old('couleur', $category->couleur)) value="danger">Rouge</option>
+          <option @selected(old('couleur', $category->couleur)) value="dark">Noire</option>
+        </select>
+        <label class="absolute left-4 -top-2.5 bg-gray-800 px-2 text-sm text-gray-400">Sélectionner une couleur</label>
       </div>
-      @error('image')
-        <div class="alert alert-danger mt-2">
-            {{$message}}
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="block text-sm text-gray-400">Photo (si possible)</label>
+          <input type="file" name="image" id="fileUpload" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-2 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-500 file:text-white hover:file:bg-blue-600">
         </div>
-    @enderror
-
-    <div class="col-md-12">
-      <label for="validationDefault03" class="form-label">Code Svg(si possible)</label>
-      <input type="text" name="svg" class="form-control"  id='fileUpload'/>
-  </div>
-
-    
-  </div>
-
-    <div class="form-floating  mt-3">
-      <textarea class="form-control" name="description" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">
-        {{old('description',$category->description)}}
-    </textarea>
-      <label for="floatingTextarea2">Description</label>
-
-      @error('description')
-        <div class="alert alert-danger mt-2">
-            {{$message}}
+        <div class="h-48 bg-gray-700 rounded-lg overflow-hidden">
+          <img id="imageDiv" class="w-full h-full object-cover"/>
         </div>
-    @enderror
-    </div>
+      </div>
 
-    <div class="form-check form-switch mt-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="status" value="1" {{$category->status == 1 ? "checked" : ""}}  >
-      <label class="form-check-label" for="flexSwitchCheckChecked">Masqué</label>
-    </div>
-@error('status')
-  {{$message}}
-@enderror
+      <div>
+        <label class="block text-sm text-gray-400 mb-2">Code SVG (si possible)</label>
+        <input type="text" name="svg" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200">
+      </div>
 
-    <div class="col-auto mt-3">
-      <button type="submit"  class="btn btn-primary mb-3">
-        @if ($category->exists)
-          Modifier
-        @else
-          Ajouter
-        @endif
+      <div class="relative">
+        <textarea name="description" id="description" rows="4" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200">{{old('description',$category->description)}}</textarea>
+        <label class="absolute left-4 -top-2.5 bg-gray-800 px-2 text-sm text-gray-400">Description</label>
+      </div>
+
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" name="status" value="1" class="sr-only peer" {{$category->status == 1 ? "checked" : ""}}>
+        <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+        <span class="ml-3 text-sm text-gray-400">Masqué</span>
+      </label>
+
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition duration-200 transform hover:scale-[1.02] active:scale-[0.98]">
+        {{ $category->exists ? 'Modifier' : 'Ajouter' }}
       </button>
-    </div>
-  </form>
-    
+    </form>
+  </div>
+</div>
+
 <script>
-  document.getElementById('fileUpload').addEventListener('change', function() {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-          document.getElementById('imageDiv').src = e.target.result;
-      }
-      reader.readAsDataURL(this.files[0]);
-  });
-  </script>
-  <script>
-  document.getElementById('fileUpload').addEventListener('change', function() {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-          var img = document.createElement('img');
-          img.src = e.target.result;
-          document.getElementById('imageDiv').appendChild(img);
-      }
-      reader.readAsDataURL(this.files[0]);
-  });
-  </script>
+document.getElementById('fileUpload').addEventListener('change', function() {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('imageDiv').src = e.target.result;
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+</script>
 
 @endsection
