@@ -58,7 +58,7 @@ $count1=0;
                     @endif
                     @if($astuce->image)
                     <img src="{{$astuce->imageUrlAstuce()}}"
-                        class="w-full h-auto rounded-lg object-cover"
+                        class="h-96 w-full rounded-lg object-cover"
                         alt="{{$astuce->titre}}">
                         @endif
                 </div>
