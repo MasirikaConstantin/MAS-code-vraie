@@ -114,7 +114,7 @@
   }
   
   nav {
-    animation: glow 3s infinite;
+    /*animation: glow 3s infinite;*/
   }
   
   #dropdownInformation {
@@ -131,7 +131,7 @@
   
   /* Animation d'apparition du dropdown */
   #dropdownInformation.show {
-    animation: dropdownFade 0.3s ease-in-out;
+    /*animation: dropdownFade 0.3s ease-in-out;*/
   }
   
   @keyframes dropdownFade {
