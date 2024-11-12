@@ -112,9 +112,15 @@ use Illuminate\Support\Str;
         @foreach ($categories as $category)
         <div class="relative  bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl flex rounded-lg border border-5 border-{{$category->couleur}} overflow-hidden">
             <div class="w-1/4 p-4">
+                @if ($category->image)
+                <div class="w-full h-full">
+                    <img src="{{ $category->imageUrlcat() }}" alt="">
+                </div>
+                @else
                 <div class="w-full h-full">
                     {!! $category->svg !!}
                 </div>
+                @endif
             </div>
             <div class="flex-1 p-4">
                 <h5 class="font-bold text-gray-100">{{$category->titre}}</h5>
