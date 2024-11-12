@@ -23,7 +23,7 @@
 
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2 text-blue-400">{{$astuce->users->name}}</div>
-                        <p class="text-gray-400 text-base">{{$astuce->description}}</p>
+                        <p class="text-gray-400 text-base"> {{Str::limit($astuce->description,90)}}</p>
                     </div>
 
                     <div class="px-6 py-4">
