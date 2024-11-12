@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('index',[
         'posts'=>Post::paginate(6)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
         'astuces'=>Astuce::orderBy('id','desc')->where('etat',true)->paginate(6),
-        'categories'=>Categorie::select('id','titre','description','couleur','image', 'svg')->get()
+        'categories'=>Categorie::orderBy('titre', 'asc')->get()
     ]);
 })->name('index');
 
