@@ -21,7 +21,7 @@ class AdminControl extends Controller
         
         return view('admin.dashboard', [
             'posts' => Post::all(),
-            'category' => Categorie::orderBy('nom', 'asc')->get(), // Trier par nom en ordre croissant
+            'category' => Categorie::orderBy('titre', 'asc')->get(), // Trier par nom en ordre croissant
             'tags' => Tag::all(),
             'users' => User::all()
         ]);
