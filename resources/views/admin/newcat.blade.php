@@ -42,7 +42,7 @@
 
       <div>
         <label class="block text-sm text-gray-400 mb-2">Code SVG (si possible)</label>
-        <input type="text" name="svg" class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200">
+        <input type="text" name="svg" {{old('svg',$category->svg)}} class="w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition duration-200">
       </div>
 
       <div class="relative">
