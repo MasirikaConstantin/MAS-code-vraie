@@ -302,7 +302,7 @@ public function postdelete( Post $post,string $id ){
             return view ('user.tous',
             [
                 'posts' => $query->orderByDesc('id')->paginate(4),
-                'categories' => Categorie::select('id','titre','description','couleur','image', 'svg')->get(),
+                'categories' => Categorie::orderBy('titre', 'asc')->get(),
                 'input'=>$request->validated()
             ]);
         
