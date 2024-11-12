@@ -19,7 +19,13 @@ class AdminControl extends Controller
 {
     public function dashboard(){
         
-        return view('admin.dashboard',['posts' =>Post::all(),'category' =>Categorie::all(),'tags' =>Tag::all(),'users' =>User::all()]);
+        return view('admin.dashboard', [
+            'posts' => Post::all(),
+            'category' => Categorie::orderBy('nom', 'asc')->get(), // Trier par nom en ordre croissant
+            'tags' => Tag::all(),
+            'users' => User::all()
+        ]);
+        
     }
     public function newcat(Categorie $category){
         return view('admin.newcat',['category' =>$category]);
