@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('index',[
         'posts'=>Post::paginate(6)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
         'astuces'=>Astuce::orderBy('id','desc')->where('etat',true)->paginate(6),
-        'categories'=>Categorie::orderBy('titre', 'asc')->get()
+        'categories' => Categorie::where('status', 0)->orderBy('titre', 'asc')->get()
+
     ]);
 })->name('index');
 
@@ -61,7 +62,7 @@ Route::prefix('user')->name('user.')->controller(UserControl::class)->group(func
     })->name('accueil');
 
 
-    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur', 'verified'])->name('newpost');
+    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur', 'rolemanager:admin','verified'])->name('newpost');
     Route::post('/newpost', 'save');
 
     Route::get('/{post}/modifier','modifier')->name('modif');
@@ -147,7 +148,7 @@ Route::get('/user/contact', [UserControl::class])->name('contact1');
 Route::post('/user/{post}/contact', [UserControl::class,'contact'])->name('user.contact');
 
 
-Route::prefix('astuces')->name('astuces.')->middleware('rolemanager:utilisateur')->controller(AstucesControllers::class)->group(function (){
+Route::prefix('astuces')->name('astuces.')->middleware(['rolemanager:utilisateur', 'rolemanager:admin',"verified"])->controller(AstucesControllers::class)->group(function (){
 
 
     Route::get('/new','create')->name('new');
@@ -158,17 +159,8 @@ Route::prefix('astuces')->name('astuces.')->middleware('rolemanager:utilisateur'
         'astuce'=>'[0-9]+',
     'nom'=>'[a-zA-Z0-9\-]+'
     ])->name('mesastuces');
-
-
     Route::get('/edit/{astuce}','edit')->name('editastuce');
-
     Route::post('/edit/{astuce}','update');
-
-
-    
-
-    
-
 });
 
 Route::get('astuces/{nom}-{astuce}',[AstucesControllers::class, 'show'])->where([
