@@ -3,7 +3,7 @@
 
 {{-- Greeting --}}
 @if (! empty($greeting))
-<h1 style="font-size: 1.8rem; color: #333333; margin-bottom: 1.5rem;">
+<h1 style="font-size: 1.8rem; color: #333333; margin-bottom: 1.4rem;">
     {{ $greeting }}
 </h1>
 @else
