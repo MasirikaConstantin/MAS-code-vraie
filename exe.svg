@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Futuriste</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="relative p-10 bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-md">
+        
+        <!-- SVG Motif de fond -->
+        <svg class="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 800 800">
+            <circle cx="400" cy="400" r="350" stroke="#00aaff" stroke-width="20" />
+            <circle cx="400" cy="400" r="280" stroke="#00aaff" stroke-width="10" />
+            <circle cx="400" cy="400" r="210" stroke="#00aaff" stroke-width="5" />
+        </svg>
+
+        <!-- Titre -->
+        <h2 class="text-center text-2xl font-bold text-blue-400 mb-6">Connexion</h2>
+        
+        <!-- Champ d'entrée -->
+        <div class="relative">
+            <input type="text" placeholder="Entrez votre identifiant" 
+                   class="w-full px-4 py-3 text-white bg-gray-700 border border-blue-500 rounded-md outline-none focus:ring-2 focus:ring-blue-500 placeholder-blue-300 text-center" />
+            
+            <!-- Style pour l'effet futuriste autour de l'input -->
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-transparent opacity-30 rounded-md pointer-events-none transform scale-105"></div>
+        </div>
+    </div>
+</body>
+</html>
