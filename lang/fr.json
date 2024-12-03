@@ -241,6 +241,9 @@
     "You're logged in!": "Vous êtes connecté·e !",
     "Your email address is unverified.": "Votre adresse e-mail n'est pas vérifiée.",
     "mon-site": "Mas Code",
-    "Create Account" : "Créer un compte"
+    "Create Account" : "Créer un compte",
+    "Go Back Home":"Retour à l'accueil",
+    "The page you're looking for seems to have gone on a little adventure. Don't worry, we'll help you find your way back home.":"La page que vous recherchez semble avoir vécu une petite aventure. Ne vous inquiétez pas, nous vous aiderons à retrouver votre chemin.",
+    "Oops! Page Not Found":"Oups ! Page non trouvée"
 
 }
