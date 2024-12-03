@@ -122,22 +122,7 @@ class UserControl extends Controller
         return redirect()->route('dashboard')->with('success','Blog publier avec Success ! ! ! ');
 
     }
-    private function extractData(Post $post,PostValidate $request){
-        $data=$request->validated();
-        //dd($data);
-        /**
-        * @var UploadedFile $image
-         */
-        $image=$request->validated('image');
-        if($image==null || $image->getError()){
-            return $data;
-        }
-        if($post->image){
-            Storage::disk('public')->delete($post->image);
-        }
-            $data['image']=$image->store("imagePost",'public');
-        return $data;
-    }
+    
     public function modifier(Post $post){
         if(isset($post)){
             
