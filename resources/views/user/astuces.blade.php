@@ -1,8 +1,3 @@
-@extends('base')
-@section('titre', Str::substr($astuce->titre,0,20))
-@section('section',($astuce->titre))
-@section('contenus')
-
 <meta property="og:title" content="{{ $astuce->titre }}" />
 <meta property="og:description" content="{{ $astuce->titre }}" />
 <meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
@@ -14,6 +9,12 @@
 <meta property="og:locale" content="fr_FR" />
 <meta property="article:published_time" content="{{ $astuce->created_at->toIso8601String() }}" />
 <meta property="article:modified_time" content="{{ $astuce->updated_at->toIso8601String() }}" />
+
+@extends('base')
+@section('titre', Str::substr($astuce->titre,0,20))
+@section('section',($astuce->titre))
+@section('contenus')
+
 
 
 @php
