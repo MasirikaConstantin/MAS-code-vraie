@@ -3,6 +3,19 @@
 @section('section',($astuce->titre))
 @section('contenus')
 
+<meta property="og:title" content="{{ $astuce->titre }}" />
+<meta property="og:description" content="{{ $astuce->introduction }}" />
+<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : $astuce->category->svg }}" />
+<meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Mas Code Product" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="article:published_time" content="{{ $astuce->created_at->toIso8601String() }}" />
+<meta property="article:modified_time" content="{{ $astuce->updated_at->toIso8601String() }}" />
+
+
 @php
 $user=Auth::user();
 date_default_timezone_set('Europe/Paris');
