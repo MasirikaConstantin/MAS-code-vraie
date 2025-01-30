@@ -5,7 +5,7 @@
 
 <meta property="og:title" content="{{ $astuce->titre }}" />
 <meta property="og:description" content="{{ $astuce->introduction }}" />
-<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : $astuce->category->svg }}" />
+<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
 <meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Mas Code Product" />
