@@ -4,7 +4,7 @@
 @section('contenus')
 
 <meta property="og:title" content="{{ $astuce->titre }}" />
-<meta property="og:description" content="{{ $astuce->introduction }}" />
+<meta property="og:description" content="{{ $astuce->titre }}" />
 <meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
 <meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
 <meta property="og:type" content="article" />
