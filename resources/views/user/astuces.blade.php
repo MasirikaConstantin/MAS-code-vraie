@@ -1,17 +1,39 @@
-<meta property="og:title" content="{{ $astuce->titre }}" />
-<meta property="og:description" content="{{ $astuce->titre }}" />
-<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
-<meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $astuce->titre }} - Mascodeproduct</title>
+<meta name="description" content="{{ $astuce->description }}" />
+<meta name="keywords" content="{{ implode(', ', $astuce->tags->pluck('nom')->toArray()) }}" />
+<meta name="author" content="{{ $astuce->users->name }}" />
+<meta name="robots" content="all">
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:site_name" content="Mascodeproduct" />
+<meta name="msvalidate.01" content="F61941C03B23140DCAE7F648A3DEE7E6" />
+<meta name="X-CSRF-TOKEN" content="{{ csrf_token() }}">
 <meta property="og:type" content="article" />
-<meta property="og:site_name" content="Mas Code Product" />
+<meta property="og:title" content="{{ $astuce->titre }}" />
+<meta property="og:description" content="{{ $astuce->description }}" />
+<meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
+<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:locale" content="fr_FR" />
+<meta property="article:author" content="{{ $astuce->users->name }}" />
+<meta property="article:tag" content="{{ implode(', ', $astuce->tags->pluck('nom')->toArray()) }}" />
 <meta property="article:published_time" content="{{ $astuce->created_at->toIso8601String() }}" />
 <meta property="article:modified_time" content="{{ $astuce->updated_at->toIso8601String() }}" />
-
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@Mascodeproduct" />
+<meta name="twitter:creator" content="@{{ $astuce->users->name }}" />
+<meta name="twitter:title" content="{{ $astuce->titre }}" />
+<meta name="twitter:description" content="{{ $astuce->description }}" />
+<meta name="twitter:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Mascodeproduct">
+<meta name="msapplication-TileImage" content="{{ asset('mas product.png') }}">
+<meta name="msapplication-TileColor" content="#E11308">
 @extends('base')
-@section('titre', Str::substr($astuce->titre,0,20))
+@section('titre', $astuce->titre)
 @section('section',($astuce->titre))
 @section('contenus')
 
