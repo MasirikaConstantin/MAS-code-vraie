@@ -123,6 +123,22 @@ class UserControl extends Controller
 
     }
     
+    private function extractData(Post $astuce,PostValidate $request){
+        $data=$request->validated();
+        //dd($data);
+        /**
+        * @var UploadedFile $image
+         */
+        $image=$request->validated('image');
+        if($image==null || $image->getError()){
+            return $data;
+        }
+        if($astuce->image){
+            Storage::disk('public')->delete($astuce->image);
+        }
+            $data['image']=$image->store("imagePost",'public');
+        return $data;
+    }
     public function modifier(Post $post){
         if(isset($post)){
             
