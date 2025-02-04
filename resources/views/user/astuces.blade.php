@@ -4,14 +4,14 @@
 <title>{{ $astuce->titre }} - Mascodeproduct</title>
 <meta name="description" content="{{ $astuce->description }}" />
 <meta name="keywords" content="{{ implode(', ', $astuce->tags->pluck('nom')->toArray()) }}" />
-<meta name="author" content="{{ $astuce->users->name }}" />
+<meta name="author" content="{{ mb_strtoupper($astuce->users->name,'UTF-8') }}" />
 <meta name="robots" content="all">
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:site_name" content="Mascodeproduct" />
 <meta name="msvalidate.01" content="F61941C03B23140DCAE7F648A3DEE7E6" />
 <meta name="X-CSRF-TOKEN" content="{{ csrf_token() }}">
 <meta property="og:type" content="article" />
-<meta property="og:title" content="{{ $astuce->titre }}" />
+<meta property="og:title" content="{{ mb_strtoupper($astuce->titre, 'UTF-8') }}" />
 <meta property="og:description" content="{{ $astuce->description }}" />
 <meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug, 'astuce' => $astuce->id]) }}" />
 <meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />

@@ -1,3 +1,38 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $post->titre }} - Mas Code Product</title>
+<meta name="description" content="{{ $post->description }}" />
+<meta name="keywords" content="{{ implode(', ', $post->tags->pluck('nom')->toArray()) }}" />
+<meta name="author" content="{{ mb_strtoupper($post->users->name, 'UTF-8') }}" />
+<meta name="robots" content="all">
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:site_name" content="Mas Code Product" />
+<meta name="msvalidate.01" content="F61941C03B23140DCAE7F648A3DEE7E6" />
+<meta name="X-CSRF-TOKEN" content="{{ csrf_token() }}">
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ mb_strtoupper($post->titre, 'UTF-8') }}" />
+<meta property="og:description" content="{{ $post->description }}" />
+<meta property="og:url" content="{{route('user.show',['nom'=>Str::lower($post->slug),'post'=>$post])}}" />
+<meta property="og:image" content="{{ $post->imageUrl() ? $post->imageUrl() : asset('mas product.png') }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="article:author" content="{{ mb_strtoupper($post->users->name,'UTF-8') }}" />
+<meta property="article:tag" content="{{ implode(', ', $post->tags->pluck('nom')->toArray()) }}" />
+<meta property="article:published_time" content="{{ $post->created_at->toIso8601String() }}" />
+<meta property="article:modified_time" content="{{ $post->updated_at->toIso8601String() }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@Mascodeproduct" />
+<meta name="twitter:creator" content="{{ '@'.$post->users->name }}" />
+<meta name="twitter:title" content="{{ $post->titre }}" />
+<meta name="twitter:description" content="{{ $post->description }}" />
+<meta name="twitter:image" content="{{ $post->imageUrl() ? $post->imageUrl() : asset('mas product.png') }}" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Mas Code Product">
+<meta name="msapplication-TileImage" content="{{ asset('mas product.png') }}">
+<meta name="msapplication-TileColor" content="#E11308">
+
 @extends('base')
 @section('contenus')
 @section('section',"")
@@ -167,8 +202,6 @@ setlocale(LC_TIME,'fr_FR.utf8');
                   <pre style="" class="border border-5  mt-5 " ><code class="{{$class}}">{{($post->codesource)}}</code></pre>
                 @endif
           </p>
-          
-
 
 <div class="">
 

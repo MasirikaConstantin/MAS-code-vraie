@@ -1,1 +1,0 @@
-<?php /**PATH /home/mascodep/public_html/blog.mascodeproduct.com/site/resources/views/admin/auth/logout.blade.php ENDPATH**/ ?>
