@@ -62,7 +62,7 @@ Route::prefix('user')->name('user.')->controller(UserControl::class)->group(func
     })->name('accueil');
 
 
-    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur', 'rolemanager:admin','verified'])->name('newpost');
+    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur,admin'])->name('newpost');
     Route::post('/newpost', 'save');
 
     Route::get('/{post}/modifier','modifier')->name('modif');
