@@ -538,7 +538,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
              
 @auth
 
-        <div class="mt-6"  >
+        <!--div class="mt-6"  >
 
           <form method="POST" action="{{route("signalement",["user"=>Auth::user()->id, "post"=>$post->id])}}">
             @csrf
@@ -555,7 +555,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
             @error('Raison')
                 {{$message}}
             @enderror
-            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-800 adrks:bg-gray-700 adrks:border-gray-600">
+            <--div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-800 adrks:bg-gray-700 adrks:border-gray-600">
                 <div class="px-4 py-2 bg-gray-400 rounded-t-lg adrks:bg-gray-800">
                     <label for="comment" class="sr-only">Your comment</label>
                     <textarea id="comment" name="Raison" rows="4" class="w-full px-0 text-sm text-gray-900 bg-gray-400 border-0 adrks:bg-gray-800 focus:ring-0 adrks:text-white adrks:placeholder-gray-400" placeholder="Votre Raison" required ></textarea>
@@ -572,7 +572,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
         </form>
         <p class="ms-auto text-xs text-gray-500 adrks:text-gray-400">Envoyer un signalement en cas d'abus sur ce post.</p>
         
-        </div>
+        </div-->
 
 @endauth
 
