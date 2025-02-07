@@ -193,7 +193,6 @@ setlocale(LC_TIME,'fr_FR.utf8');
           </header>
           @if ($post->image)
           <figure><img src="{{ $post->imageUrl() }}" alt="">
-            <figcaption>Digital art by Anonymous</figcaption>
         </figure>
           @endif
           <p class="lead">{!! $post->contenus !!}</p>

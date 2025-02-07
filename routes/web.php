@@ -33,9 +33,9 @@ Route::get('/astuces', [AstucesControllers::class,'index'])->name('astuces');
 
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard' ,[UserControl::class ,'dashboard'])->middleware(['rolemanager:utilisateur', 'verified'])->name('dashboard');
+Route::get('/dashboard' ,[UserControl::class ,'dashboard'])->name('dashboard')->middleware(['auth']);
 
-Route::middleware('rolemanager:utilisateur')->group(function () {
+Route::middleware('rolemanager:utilisateur,admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -62,7 +62,7 @@ Route::prefix('user')->name('user.')->controller(UserControl::class)->group(func
     })->name('accueil');
 
 
-    Route::get('/newpost', 'newpost')->middleware(['rolemanager:utilisateur,admin'])->name('newpost');
+    Route::get('/newpost', 'newpost')->name('newpost')->middleware(['auth']);
     Route::post('/newpost', 'save');
 
     Route::get('/{post}/modifier','modifier')->name('modif');
@@ -148,7 +148,7 @@ Route::get('/user/contact', [UserControl::class])->name('contact1');
 Route::post('/user/{post}/contact', [UserControl::class,'contact'])->name('user.contact');
 
 
-Route::prefix('astuces')->name('astuces.')->middleware(['rolemanager:utilisateur,admin'])->controller(AstucesControllers::class)->group(function (){
+Route::prefix('astuces')->name('astuces.')->middleware(['auth'])->controller(AstucesControllers::class)->group(function (){
 
 
     Route::get('/new','create')->name('new');

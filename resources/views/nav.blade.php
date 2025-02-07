@@ -78,8 +78,17 @@
             @auth
               <ul class="py-2 text-sm text-cyan-400">
                 <li>
-                  <a href="{{route('dashboard')}}" class="block px-4 py-3 text-base hover:bg-gray-800/50 transition-colors duration-300">{{__("Dashboard")}}</a> <!-- Padding et texte plus grands -->
+                  <a href="{{route('dashboard')}}" class="block px-4 py-3 text-base hover:bg-gray-800/50 transition-colors duration-300">{{__("Mon Compte")}}</a> <!-- Padding et texte plus grands -->
                 </li>
+                @auth
+                  @if (Auth::user()->role==0)
+                  <li>
+                    <a href="{{route('admin.dashboard')}}" class="block px-4 py-3 text-base hover:bg-gray-800/50 transition-colors duration-300">{{__("Dashboard")}}</a> <!-- Padding et texte plus grands -->
+                  </li>
+                    
+                  @endif
+                @endauth
+
                 <li>
                   <a href="{{route('user.newpost')}}" class="block px-4 py-3 text-base hover:bg-gray-800/50 transition-colors duration-300">Nouveau Post</a> <!-- Padding et texte plus grands -->
                 </li>

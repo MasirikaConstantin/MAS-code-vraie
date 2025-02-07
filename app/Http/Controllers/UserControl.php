@@ -401,25 +401,101 @@ public function postdelete( Post $post,string $id ){
 
 
         
-        public function showprofil(string $nom, string $user){
-           $user=User::find($user);
-            //dd($user);
-            //dd(Str::slug($user->name,'-'));
-        
+       /* 
+            public function showprofil(string $nom, string $user){
+             $user=User::find($user);
+                //dd($user);
+                //dd(Str::slug($user->name,'-'));
             
-            //return view('user.show',['post'=>$post,'commentaires'=>$post->comments,]);
+                
+                //return view('user.show',['post'=>$post,'commentaires'=>$post->comments,]);
 
-            if(Auth::user()){
-            return view('user.profil',['user'=>$user,'ubs'=>Subscription::where('user_id',Auth::user()->id )->where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
-            }else{
-                return view('user.profil',['user'=>$user,'ubs'=>Subscription::where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
+                if(Auth::user()){
+                return view('user.profil',['user'=>$user,'ubs'=>Subscription::where('user_id',Auth::user()->id )->where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
+                }else{
+                    return view('user.profil',['user'=>$user,'ubs'=>Subscription::where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
+                }
+                if($user->name  != $nom){
+                    return to_route('user.profil',['user'=>$user,'nom'=>Str::slug($user->name,'-'), 'ubs'=>Subscription::where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
+                }
             }
-            if($user->name  != $nom){
-                return to_route('user.profil',['user'=>$user,'nom'=>Str::slug($user->name,'-'), 'ubs'=>Subscription::where('follows_id',$user->id),'posts'=>Post::where('user_id',$user->id)->paginate(3)]);
+            
+        */
+
+        public function showprofil(string $nom, string $user)
+        {
+            // Récupérer l'utilisateur dont le profil est consulté
+            $user = User::findOrFail($user);
+        
+            // Vérifier si le nom dans l'URL correspond au nom de l'utilisateur (version slugifiée)
+            $correctSlug = Str::slug($user->name, '-');
+            if ($nom !== $correctSlug) {
+                return redirect()->route('user.profil', [
+                    'user' => $user->id,
+                    'nom' => $correctSlug,
+                ]);
             }
+        
+            // Récupérer les posts de l'utilisateur avec pagination
+            $posts = Post::where('user_id', $user->id)
+                         ->orderBy('created_at', 'desc')
+                         ->paginate(3);
+        
+            // Vérifier si l'utilisateur est connecté et s'il est abonné
+            $isSubscribed = false;
+            if (Auth::check()) {
+                $isSubscribed = Subscription::where('user_id', Auth::id())
+                    ->where('follows_id', $user->id)
+                    ->exists();
+            }
+        
+            // Retourner la vue avec les données nécessaires
+            return view('user.profil', compact('user', 'isSubscribed', 'posts'));
+        }
+        
+        // Méthode pour s'abonner
+        public function subscribe(User $user)
+        {
+            if (!Auth::check()) {
+                return redirect()->route('login');
+            }
+        
+            // Vérifier que l'utilisateur ne s'abonne pas à lui-même
+            if (Auth::id() === $user->id) {
+                return back()->with('error', 'Vous ne pouvez pas vous abonner à vous-même.');
+            }
+        
+            // Vérifier si l'abonnement existe déjà
+            $existingSubscription = Subscription::where('user_id', Auth::id())
+                ->where('follows_id', $user->id)
+                ->exists();
+        
+            if (!$existingSubscription) {
+                Subscription::create([
+                    'user_id' => Auth::id(),
+                    'follows_id' => $user->id,
+                ]);
+                return back()->with('success', 'Vous êtes maintenant abonné.');
+            }
+        
+            return back()->with('info', 'Vous êtes déjà abonné.');
+        }
+        
+        // Méthode pour se désabonner
+        public function unsubscribe(User $user)
+        {
+            if (!Auth::check()) {
+                return redirect()->route('login');
+            }
+        
+            Subscription::where('user_id', Auth::id())
+                ->where('follows_id', $user->id)
+                ->delete();
+        
+            return back()->with('success', 'Vous êtes maintenant désabonné.');
         }
 
-        public function subscribe(User $user)
+        /*public function subscribe(User $user)
         {
             $ubs=Subscription::where('user_id',Auth::user()->id )->where('follows_id',$user->id);
             if($ubs->count()>0){
@@ -441,7 +517,7 @@ public function postdelete( Post $post,string $id ){
             auth()->user()->unsubscribeFrom($user);
             return back();
         }
-
+*/
         
         public function EditEtat(Post $id){
            // $id->update(['etat' => 1]);

@@ -2,7 +2,6 @@
 @section('section', 'Profil Utilisateur')
 @section('titre', $user->name)
 @section('contenus')
-
 <div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-6">
     <div class="max-w-7xl mx-auto">
         <!-- En-tête du profil -->
@@ -12,7 +11,9 @@
                     {{ $user->role === 1 ? 'Utilisateur' : 'Administrateur' }}
                 </span>
             </div>
+
             
+
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <div class="relative group">
                     @if($user->image)
@@ -24,7 +25,6 @@
                             {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
                     @endif
-                    
                 </div>
 
                 <div class="text-center md:text-left">
@@ -39,6 +39,27 @@
                             <span class="text-gray-400 text-sm">Dernière connexion</span>
                             <p class="text-white">{{ $user->updated_at->diffForHumans() }}</p>
                         </div>
+
+                        <div class="px-4 py-2 bg-gray-700/50 rounded-lg">
+
+                        <!-- Boutons S'abonner/Se désabonner -->
+                            @auth
+                            <span class="text-gray-400 text-sm">Action</span>
+                            <div class=" top-0 left-0 p-2">
+
+                                @if ($isSubscribed)
+                                    <a href="{{ route('user.unsubscribe', $user) }}" class="px-4 py-2 bg-red-500/20 text-red-400 rounded-full text-sm hover:bg-red-500/30 transition-all">
+                                        Se désabonner
+                                    </a>
+                                @else
+                                    <a href="{{ route('user.subscribe', $user) }}" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-sm hover:bg-blue-500/30 transition-all">
+                                        S'abonner
+                                    </a>
+                                @endif
+                            </div>
+                        @endauth
+                    </div>
+
                     </div>
                 </div>
             </div>
@@ -118,13 +139,10 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4" >
-                    {{ $posts->links() }}
+            <div class="mt-4">
+                {{ $posts->links() }}
             </div>
         </div>
-
-       
     </div>
 </div>
-
 @endsection
