@@ -95,4 +95,23 @@ class User extends Authenticatable
         return $this->subscriptions()->detach($user->id);
     }
 
+    public function receivedReactions()
+    {
+        return $this->hasManyThrough(
+            Reaction::class,
+            Post::class,
+            'user_id',     // Clé étrangère sur la table posts
+            'post_id',     // Clé étrangère sur la table reactions
+            'id',          // Clé locale de users
+            'id'          // Clé locale de posts
+        );
+    }
+     // Méthode pour obtenir uniquement les likes positifs
+     public function receivedLikes()
+     {
+         return $this->receivedReactions()->where('reaction');
+     }
+ 
+     
+
 }

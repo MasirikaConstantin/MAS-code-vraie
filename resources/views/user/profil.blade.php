@@ -90,7 +90,7 @@
                     </div>
                     <div>
                         <p class="text-gray-400">Likes reçus</p>
-                        <h3 class="text-2xl font-bold text-white">{{ $user->reactions->count() }}</h3>
+                        <h3 class="text-2xl font-bold text-white">{{ $user->receivedReactions->count() }}</h3>
                     </div>
                 </div>
             </div>
@@ -134,6 +134,10 @@
                                 <span class="text-blue-400">{{ $post->created_at->diffForHumans() }}</span>
                                 <span class="text-gray-500">|</span>
                                 <span class="text-purple-400">{{ $post->category->titre }}</span>
+                                <a href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}" 
+                                    class="inline-block text-indigo-600 hover:text-indigo-700">
+                                    Lire la suite →
+                                </a>
                             </div>
                         </div>
                     </div>
