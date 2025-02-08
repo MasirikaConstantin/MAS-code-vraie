@@ -25,11 +25,12 @@
           <a href="{{route('user.newpost')}}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Post</a>
         </li>
         @endif
-        <li>
-          <a href="#" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Blog</a>
-        </li>
+        
         <li>
           <a href="{{route('user.accueil')}}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Forum</a>
+        </li>
+        <li>
+          <a href="{{ route('news') }}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Blog</a>
         </li>
         <li class="relative">
           <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 focus:ring-4 focus:ring-cyan-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-all duration-300" type="button">

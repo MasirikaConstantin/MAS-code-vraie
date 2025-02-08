@@ -477,7 +477,7 @@
         </div>
 
     </div>
-    <p class="text-gray-400 text-center mt-6">&copy; 2023 - 2024 <strong>Mas Code Product </strong>Company, Inc. Tout droit réservé.</p>
+    <p class="text-gray-400 text-center mt-6">&copy; 2023 - 2025 <strong>Mas Code Product </strong>Company, Inc. Tout droit réservé.</p>
 
 </footer>
 

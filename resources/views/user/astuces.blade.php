@@ -32,6 +32,7 @@
 <meta name="apple-mobile-web-app-title" content="Mascodeproduct">
 <meta name="msapplication-TileImage" content="{{ asset('mas product.png') }}">
 <meta name="msapplication-TileColor" content="#E11308">
+
 @extends('base')
 @section('titre', $astuce->titre)
 @section('section',($astuce->titre))

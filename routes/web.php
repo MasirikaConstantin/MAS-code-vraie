@@ -12,6 +12,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\NewsController;
 
 
 Route::get('/', function () {
@@ -24,6 +25,7 @@ Route::get('/', function () {
 })->name('index');
 
 
+Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/contact', function (){
     return view("contact");
 })->name("contact");
