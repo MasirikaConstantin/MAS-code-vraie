@@ -111,7 +111,7 @@ class UserControl extends Controller
     
     //    $category=Categorie::all();
       //  dd($category);
-        return view ('user.newpost',['categories'=>Categorie::where('status',false)->get(),'tags'=>Tag::where('status',false)->get()]);
+        return view ('user.newpost',['categories'=>Categorie::orderBy("titre","asc")->where('status',false)->get(),'tags'=>Tag::where('status',false)->get()]);
     }
     public function save(PostValidate $request ){
         //dd($request->validated());

@@ -1,5 +1,6 @@
 @extends("base")
 @section('section',"")
+@section('titre',"Se Connecter")
 
 @section("contenus")
 
