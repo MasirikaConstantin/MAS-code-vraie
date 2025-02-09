@@ -2,11 +2,10 @@
 @section('titre','Forum')
 @section('contenus')
 @section('section','    ')
-<link rel="stylesheet" href="">
-<div class="bg-gradient-to-r rounded rounded-xl from-blue-900 via-blue-800 to-blue-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-gradient-to-r rounded rounded-xl from-blue-900 via-blue-900 to-blue-700 text-white py-2">
+    <div class="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
         <h1 class="text-4xl font-bold mb-4">Forum Actualités</h1>
-        <p class="text-xl text-blue-200">Bienvenue sur notre plateforme de questions et réponses. Partagez vos questions et contribuez avec vos réponses.</p>
+        <p class="text-l text-blue-200">Bienvenue sur notre plateforme de questions et réponses. Partagez vos questions et contribuez avec vos réponses.</p>
     </div>
 </div>
 @php
@@ -15,17 +14,17 @@
 <!-- Section Recent Updates -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-6 border border-gray-200/20">
-        <h2 class="text-2xl font-bold mb-6 text-blue-600">Mises à jour récentes</h2>
+        <h2 class="text-xl font-bold mb-6 text-blue-600">Mises à jour récentes</h2>
         
         @foreach($recents as $recent)
         @php
             $titre1 = str_replace(' ', '-', $recent->slug);
         @endphp
-        <div class="flex space-x-4 py-4 border-b border-gray-200/30 hover:bg-gray-700 rounded rounded-3  transition duration-200">
+        <div class="flex space-x-2 py-2 border-b border-gray-200/30 hover:bg-gray-700 rounded rounded-3  transition duration-200">
             @if($recent->users->image)
-                <img class="ms-3 h-12 w-12 rounded-full object-cover" src="{{$recent->users->imageUrls()}}" alt="{{$recent->users->name}}">
+                <img class="ms-3 h-10 w-10 rounded-full object-cover" src="{{$recent->users->imageUrls()}}" alt="{{$recent->users->name}}">
             @else
-                <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                <div class="ms-3 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                     <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
@@ -35,13 +34,13 @@
             <div class="flex-1">
                 <a href="{{route('user.show',['nom'=>Str::lower($titre1),'post'=>$recent])}}" class="block hover:text-blue-600 transition">
                     <h3 class="font-semibold text-gray-300">{{$recent->users->name}}</h3>
-                              <p class="text-gray-100 mt-1"> {{ Str::limit($recent->contenus,200) }} </p>
+                              <p class="text-gray-100 mt-1"> {{ Str::limit($recent->contenus,130) }} </p>
                 </a>
             </div>
         </div>
         @endforeach
 
-        <div class="text-right mt-6">
+        <div class="text-right mt-2">
             <a href="{{route('tous')}}" class="text-blue-600 hover:text-blue-800 font-medium">Voir toutes les publications →</a>
         </div>
     </div>
@@ -54,16 +53,16 @@
     $count++;
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+<div class="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 mb-8">
     <div class="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden border border-gray-200/20">
         <!-- Header du post -->
-        <div class="p-6 border-b border-gray-200/30">
+        <div class="p-2 border-b border-gray-200/30">
             <div class="flex items-center space-x-4">
                 <button type="button" class="focus:outline-none"  data-modal-target="userModal{{$count}}" data-modal-toggle="userModal{{$count}}">
                     @if($post->users->image)
-                        <img class="h-12 w-12 rounded-full object-cover" src="{{$post->users->imageUrls()}}" alt="{{$post->users->name}}">
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{$post->users->imageUrls()}}" alt="{{$post->users->name}}">
                     @else
-                        <img class="h-12 w-12 rounded-full object-cover" src="{{asset('téléchargement.png')}}" alt="Default">
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{asset('téléchargement.png')}}" alt="Default">
                     @endif
                 </button>
 
@@ -83,18 +82,18 @@
 
         <!-- Contenu du post -->
         <div class="p-6">
-            <p class="text-gray-200 mb-4">{!!Str::limit($post->contenus,576)!!}</p>
+            <p class="text-gray-200 mb-4">{!!Str::limit($post->contenus,500)!!}</p>
 
             @if($post->codesource)
                 <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                    <pre><code class="language-{{$post->category->language ?? 'plain'}} text-sm">{{Str::limit($post->codesource,250)}}</code></pre>
+                    <pre><code class="language-{{$post->category->language ?? 'plain'}} text-sm">{{Str::limit($post->codesource,150)}}</code></pre>
                 </div>
             @endif
 
             @if($post->image)
                 <div class="mt-4 rounded-lg overflow-hidden">
                     <img data-fancybox src="{{$post->imageUrl()}}" alt="{{$post->titre}}" 
-                         class="w-full h-[300px] object-cover transform hover:scale-105 transition duration-300">
+                         class="w-full h-[200px] object-cover transform hover:scale-105 transition duration-300">
                 </div>
             @endif
 
@@ -117,8 +116,7 @@
                 <div class="flex items-center space-x-4">
                     <span>{{$post->views_count}} {{$post->views_count > 1 ? 'vues' : 'vue'}}</span>
                     <span>Par : <i class="text-gray-100" >{{$post->users->name}}</i></span>
-                    <p>Publié le : <span class="text-gray-200">{{$post->updated_at->formatLocalized('%d %B %Y')}}</span> </p>
-                </div>
+                    <p>Publié le : <span class="text-gray-200">{{ $post->created_at->translatedFormat('d F Y') }}</span></p>                </div>
                 <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}" 
                    class="text-blue-600 hover:text-blue-800 font-medium">
                     Lire la suite →

@@ -19,96 +19,96 @@
       font-weight: bolder;
       overflow: hidden;
         }
-    .mes svg{
-      width: 300px;
-      height: 200px;
-    }
-  
-  
-    @media (max-width: 500px){
-          .titre{
-          font-size: 22px
-            
-          }
-          .mes{
-          display: inline-block;
-      
-      color: #000;
-      vertical-align: middle;
-      
-      border: 3px solid #0e0c0cc4;
-      border-radius: 5px;
-      font-weight: bolder;
-      overflow: hidden;
-        }
-    .mes svg{
-      width: 100px;
-      height: 200px;
-    }
-        }
-        @media (max-width: 371px){
-          .espa{
-            
-            margin-bottom: 1rem !important;
-                  
-                }
-        }
-        @media (max-width: 925px){
-          .titre{
-          font-size: 22px
-            
-          }
+            .mes svg{
+              width: 300px;
+              height: 200px;
+            }
           
-          .mon{
-              max-height: 100%;
-              max-width: 100%;
-              width: 100px!important;
-              object-fit: cover;
-              height: 150px!important;
-              object-fit: cover;
-              border-radius: 12px;
-          }
-  
-  
-  
-        }
-  .sks{
-    position: relative;
-    display: inline-block;
-  }
-  .montxt{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(109, 100, 100, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: green;
-  
-  }
-  .pos{
-    position: relative;
-      display: block;
-      height: 280px;
-  
-      box-sizing: border-box;
-  }
-  @media (min-width: 768px) {
-    .col-md-3 {
-      flex: 0 0 auto;
-      width: 30%;
-    }
-  }
-  .bi {
-                    vertical-align: -.125em;
-                    fill: currentColor;
-                    font-size: 40px;
-
+          
+            @media (max-width: 500px){
+                  .titre{
+                  font-size: 22px
+                    
                   }
-                 
+                  .mes{
+                  display: inline-block;
+              
+              color: #000;
+              vertical-align: middle;
+              
+              border: 3px solid #0e0c0cc4;
+              border-radius: 5px;
+              font-weight: bolder;
+              overflow: hidden;
+                }
+            .mes svg{
+              width: 100px;
+              height: 200px;
+            }
+                }
+                @media (max-width: 371px){
+                  .espa{
+                    
+                    margin-bottom: 1rem !important;
+                          
+                        }
+                }
+                @media (max-width: 925px){
+                  .titre{
+                  font-size: 22px
+                    
+                  }
+                  
+                  .mon{
+                      max-height: 100%;
+                      max-width: 100%;
+                      width: 100px!important;
+                      object-fit: cover;
+                      height: 150px!important;
+                      object-fit: cover;
+                      border-radius: 12px;
+                  }
+          
+          
+          
+                }
+          .sks{
+            position: relative;
+            display: inline-block;
+          }
+          .montxt{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(109, 100, 100, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: green;
+          
+          }
+          .pos{
+            position: relative;
+              display: block;
+              height: 280px;
+          
+              box-sizing: border-box;
+          }
+          @media (min-width: 768px) {
+            .col-md-3 {
+              flex: 0 0 auto;
+              width: 30%;
+            }
+          }
+          .bi {
+                            vertical-align: -.125em;
+                            fill: currentColor;
+                            font-size: 40px;
+
+                          }
+                        
   
   </style>
 
