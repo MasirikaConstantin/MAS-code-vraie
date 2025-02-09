@@ -41,12 +41,12 @@
 
 
 @php
-$user=Auth::user();
-date_default_timezone_set('Europe/Paris');
-setlocale(LC_TIME,'fr_FR.utf8');
-\Carbon\Carbon::setLocale('fr');
-$count =0;
-$count1=0;
+                    $user=Auth::user();
+                    date_default_timezone_set('Europe/Paris');
+                    setlocale(LC_TIME,'fr_FR.utf8');
+                    \Carbon\Carbon::setLocale('fr');
+                    $count =0;
+                    $count1=0;
                         $k =0;
                         $class=null;
                       if($astuce->categorie_id==1){
@@ -101,7 +101,7 @@ $count1=0;
                 </div>
 
                 <!-- CoFcomntenu -->
-                <div class="prose prose-invert max-w-none">
+                <div class="">
                     {!! $astuce->contenus !!}
                 </div>
 
