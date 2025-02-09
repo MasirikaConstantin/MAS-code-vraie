@@ -102,7 +102,9 @@
 
                 <!-- CoFcomntenu -->
                 <div class="">
-                    {!! $astuce->contenus !!}
+                    
+          <h4 class=" text-white text-l">{!! $astuce->contenus !!}</h4>
+
                 </div>
 
                 <!-- Métadonnées -->
