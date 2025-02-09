@@ -195,7 +195,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
           <figure><img src="{{ $post->imageUrl() }}" alt="">
         </figure>
           @endif
-          <p class="lead">{!! $post->contenus !!}</p>
+          <h4 class=" text-white text-l">{!! $post->contenus !!}</h4>
           <p>
                 @if ($post->codesource)
                   <pre style="" class="border border-5  mt-5 " ><code class="{{$class}}">{{($post->codesource)}}</code></pre>
