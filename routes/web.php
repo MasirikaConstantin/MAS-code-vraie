@@ -8,6 +8,7 @@ use App\Http\Controllers\UserControl;
 use App\Http\Middleware\Authenticate;
 use App\Models\Astuce;
 use App\Models\Categorie;
+use App\Http\Controllers\EnregistrementController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -175,3 +176,10 @@ Route::post('astuces/{nom}-{astuce}', [AstucesControllers::class, 'commenter']);
 
 Route::post('/contact',[UserControl::class, "contacts"])->name("contacts");
 Route::post('/signalement/{user}/{post}',[UserControl::class, "signalement"])->name("signalement");
+
+// Routes pour l'enregistrement des posts
+Route::middleware('auth')->group(function () {
+    Route::get('/enregistrements', [EnregistrementController::class, 'index'])->name('enregistrements.index');
+    Route::post('/posts/{post}/enregistrer', [EnregistrementController::class, 'store'])->name('enregistrements.store');
+    Route::delete('/enregistrements/{post}', [EnregistrementController::class, 'destroy'])->name('enregistrements.destroy');
+});

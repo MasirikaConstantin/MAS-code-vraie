@@ -105,7 +105,8 @@ class UserControl extends Controller
 
         }
         //dd($posts);
-        return view('dashboard',['posts' => $posts,'postsbruillon' => $postsbruillons,'astuces'=>Astuce::orderBy('created_at','desc')->with('tags', 'category','users')->where('user_id','=',Auth::user()->id)->paginate(2)]);
+        $savedPosts = auth()->user()->savedPosts()->with('user')->latest()->get();
+        return view('dashboard',['savedPosts'=>$savedPosts,'posts' => $posts,'postsbruillon' => $postsbruillons,'astuces'=>Astuce::orderBy('created_at','desc')->with('tags', 'category','users')->where('user_id','=',Auth::user()->id)->paginate(2)]);
     }
     public function newpost(){
     

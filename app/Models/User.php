@@ -122,5 +122,13 @@ class User extends Authenticatable
      }
  
      
-
+     public function enregistrements()
+     {
+         return $this->hasMany(Enregistrement::class);
+     }
+     
+     public function savedPosts()
+     {
+         return $this->belongsToMany(Astuce::class, 'enregistrements')->withTimestamps();
+     }
 }

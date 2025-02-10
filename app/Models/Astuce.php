@@ -37,7 +37,10 @@ class Astuce extends Model
         //return Storage::disk('public')->url($this->image); 
     }
 
-
+    public function enregistrements()
+    {
+        return $this->hasMany(Enregistrement::class);
+    }
 
 
    

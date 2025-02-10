@@ -123,6 +123,7 @@
                                 <div class="backdrop-filter backdrop-blur-sm bg-white/5 rounded-xl p-6 border border-violet-500/20 shadow-lg">
                                     <div class="flex items-center space-x-6">
                                         <!-- Image Section -->
+                                        
                                         <div class="flex-shrink-0 relative group">
                                             @if($astuce->users->image)
                                                 <img class="h-24 w-24 rounded-full object-cover ring-4 ring-violet-400/50 shadow-lg transform group-hover:scale-105 transition-all duration-300" 
@@ -135,7 +136,8 @@
                                                      alt="Default profile"
                                                 />
                                             @endif
-                                            <div class="absolute inset-0 rounded-full bg-violet-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            <div class="absolute inset-0 rounded-full bg-violet-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                               </div>
                                         </div>
                   
                                         <!-- User Info Section -->
@@ -192,6 +194,24 @@
           <figure><img src="{{ $astuce->imageUrlAstuce() }}" alt="">
         </figure>
           @endif
+          <form action="{{ route('enregistrements.store', $astuce) }}" method="POST">
+              @csrf
+              @if (auth()->user()->savedPosts->contains($astuce))
+              <button type="button" class="text-green-500 hover:text-green-700 cursor-not-allowed" disabled>
+                Déjà enregistré
+            </button>
+                @else
+
+              <button type="submit" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
+                <svg class="w-[20px] h-[20px] mr-4 text-amber-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6"/>
+                  </svg>
+                  
+                Enregistrer ce post
+                </button>
+            
+                @endif
+          </form>
           <div class=" text-white text-l" style="color: white !important">{!! $astuce->contenus !!}</div>
           <p>
                 @if ($astuce->codesource)

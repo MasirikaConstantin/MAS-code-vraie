@@ -52,6 +52,11 @@ public function reactions()
         $this->views_count++;
         $this->save();
     }
-
+    
+    
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'enregistrements')->withTimestamps();
+    }
 
 }

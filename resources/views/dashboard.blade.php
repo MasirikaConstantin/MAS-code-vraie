@@ -11,7 +11,7 @@ $k=0;
   setlocale(LC_TIME,'fr_FR.utf8');
   \Carbon\Carbon::setLocale('fr');
 @endphp
-
+@ dd($savedPosts)
     <style>
         @keyframes glow {
             0% { box-shadow: 0 0 5px #4f46e5; }
@@ -123,6 +123,10 @@ $k=0;
                         </a>
                         <a href="?demande=a" class="tab-futuristic {{ request('demande') == 'a' ? 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 adrks:bg-blue-600 adrks:hover:bg-blue-700 focus:outline-none adrks:focus:ring-blue-800' : 'font-medium text-blue-600 adrks:text-blue-500 hover:underline' }}">
                             Mes Astuces
+                        </a>
+
+                        <a href="?demande=e" class="tab-futuristic {{ request('demande') == 'e' ? 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 adrks:bg-blue-600 adrks:hover:bg-blue-700 focus:outline-none adrks:focus:ring-blue-800' : 'font-medium text-blue-600 adrks:text-blue-500 hover:underline' }}">
+                            Mes Enregistrements
                         </a>
                     </div>
 
@@ -238,8 +242,8 @@ $k=0;
                         </div>
 
                         @elseif(request('demande')=="a")
-<!-- Code pour les astuces -->
-<!-- [Suite du code avec les mêmes principes de conversion] -->
+                            <!-- Code pour les astuces -->
+                            <!-- [Suite du code avec les mêmes principes de conversion] -->
                             @forelse ($astuces as $astuce)
 
                             <div class="py-2 mt-3">
@@ -295,93 +299,110 @@ $k=0;
                             </div>
 
 
-
+                            @elseif (request('demande')=="e")
+                            
+                                <div class="space-y-4">
+                                    @foreach ($savedPosts as $post)
+                                        <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                                            <h2 class="text-xl font-semibold">{{ $post->titre }}</h2>
+                                            <p class="text-gray-200 mt-2">{{ Str::limit($post->description,190) }}</p>
+                                            <p class="text-sm text-gray-300 mt-2">
+                                                Posté par {{ $post->user->name }} le {{ $post->created_at->format('d/m/Y H:i') }}
+                                            </p>
+                                            <form action="{{ route('enregistrements.destroy', $post) }}" method="POST" class="mt-4">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700">Retirer de mes enregistrements</button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                           
 
                             @elseif(request('demande')=='')
-<div class="mt-3 p-6 bg-gradient-to-br from-gray-900/90 to-slate-800/90 backdrop-blur-lg rounded-xl border border-indigo-500/20 transition-all duration-300 hover:border-indigo-500/40">
-    <div class="overflow-x-auto">
-        <table class="w-full min-w-full divide-y divide-indigo-500/20">
-            <thead>
-                <tr class="bg-indigo-500/10">
-                    <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Sujet</th>
-                    <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Etat</th>
-                    <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Visites</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-indigo-500/20 bg-gray-900/50">
-                @forelse ($postsbruillon as $post)
-                    @if ($post->etat == 1)
-                    <tr class="hover:bg-indigo-500/5 transition-colors duration-200">
-                        <td class="px-6 py-4">
-                            <div class="space-y-3">
-                                <h4 class="text-lg font-semibold text-gray-200">
-                                    {{ $post->titre}}
-                                </h4>
-                                <div class="flex items-center space-x-4 text-gray-400">
-                                    <span>Réactions</span>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="bi bi-hand-thumbs-up"></i>
-                                        <span>{{$post->reactions()->where('reaction', '1')->count()}}</span>
-                                        <i class="bi bi-hand-thumbs-down"></i>
-                                        <span>{{$post->reactions()->where('reaction', '0')->count()}}</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center text-gray-500">
-                                    <i class="bi bi-clock-history mr-2"></i>
-                                    <span>Mise à jour il y a : {{ $post->duree}}</span>
-                                </div>
-                                <div class="flex space-x-3">
-                                    <a href="{{route('user.modif',['post'=>$post->id])}}" 
-                                       class="inline-flex items-center px-4 py-2 bg-indigo-600/20 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-600 hover:text-white transition-all duration-300">
-                                        <i class="bi bi-pencil-square mr-2"></i>
-                                        Editer
-                                    </a>
-                                    <a href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}"
-                                       class="inline-flex items-center px-4 py-2 bg-gray-600/20 border border-gray-500 text-gray-400 rounded-lg hover:bg-gray-600 hover:text-white transition-all duration-300">
-                                        <i class="bi bi-eye mr-2"></i>
-                                        Voir
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            @if ($post->etat== false)
-                                <span class="px-3 py-1 text-sm font-medium bg-green-500/20 text-green-400 rounded-full">
-                                    Publié
-                                </span>
-                            @elseif($post->etat ==true)
-                                <span class="px-3 py-1 text-sm font-medium bg-amber-500/20 text-amber-400 rounded-full">
-                                    Non Publié
-                                </span>
-                            @endif
-                        </td>
-                        <td class="px-6 py-4 text-gray-400">
-                            <div class="flex items-center space-x-1">
-                                <i class="bi bi-eye"></i>
-                                <span>{{$post->views_count}}</span>
-                            </div>
-                        </td>
-                    </tr>
-                    @endif
-                @empty
-                    <tr>
-                        <td colspan="3" class="px-6 py-4">
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400">
-                                Aucune astuces pour l'instant
-                            </div>
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+                                        <div class="mt-3 p-6 bg-gradient-to-br from-gray-900/90 to-slate-800/90 backdrop-blur-lg rounded-xl border border-indigo-500/20 transition-all duration-300 hover:border-indigo-500/40">
+                                            <div class="overflow-x-auto">
+                                                <table class="w-full min-w-full divide-y divide-indigo-500/20">
+                                                    <thead>
+                                                        <tr class="bg-indigo-500/10">
+                                                            <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Sujet</th>
+                                                            <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Etat</th>
+                                                            <th class="px-6 py-4 text-left text-sm font-medium text-indigo-300 tracking-wider">Visites</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="divide-y divide-indigo-500/20 bg-gray-900/50">
+                                                        @forelse ($postsbruillon as $post)
+                                                            @if ($post->etat == 1)
+                                                            <tr class="hover:bg-indigo-500/5 transition-colors duration-200">
+                                                                <td class="px-6 py-4">
+                                                                    <div class="space-y-3">
+                                                                        <h4 class="text-lg font-semibold text-gray-200">
+                                                                            {{ $post->titre}}
+                                                                        </h4>
+                                                                        <div class="flex items-center space-x-4 text-gray-400">
+                                                                            <span>Réactions</span>
+                                                                            <div class="flex items-center space-x-2">
+                                                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                                                <span>{{$post->reactions()->where('reaction', '1')->count()}}</span>
+                                                                                <i class="bi bi-hand-thumbs-down"></i>
+                                                                                <span>{{$post->reactions()->where('reaction', '0')->count()}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex items-center text-gray-500">
+                                                                            <i class="bi bi-clock-history mr-2"></i>
+                                                                            <span>Mise à jour il y a : {{ $post->duree}}</span>
+                                                                        </div>
+                                                                        <div class="flex space-x-3">
+                                                                            <a href="{{route('user.modif',['post'=>$post->id])}}" 
+                                                                            class="inline-flex items-center px-4 py-2 bg-indigo-600/20 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-600 hover:text-white transition-all duration-300">
+                                                                                <i class="bi bi-pencil-square mr-2"></i>
+                                                                                Editer
+                                                                            </a>
+                                                                            <a href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}"
+                                                                            class="inline-flex items-center px-4 py-2 bg-gray-600/20 border border-gray-500 text-gray-400 rounded-lg hover:bg-gray-600 hover:text-white transition-all duration-300">
+                                                                                <i class="bi bi-eye mr-2"></i>
+                                                                                Voir
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="px-6 py-4">
+                                                                    @if ($post->etat== false)
+                                                                        <span class="px-3 py-1 text-sm font-medium bg-green-500/20 text-green-400 rounded-full">
+                                                                            Publié
+                                                                        </span>
+                                                                    @elseif($post->etat ==true)
+                                                                        <span class="px-3 py-1 text-sm font-medium bg-amber-500/20 text-amber-400 rounded-full">
+                                                                            Non Publié
+                                                                        </span>
+                                                                    @endif
+                                                                </td>
+                                                                <td class="px-6 py-4 text-gray-400">
+                                                                    <div class="flex items-center space-x-1">
+                                                                        <i class="bi bi-eye"></i>
+                                                                        <span>{{$post->views_count}}</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            @endif
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="3" class="px-6 py-4">
+                                                                    <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400">
+                                                                        Aucune astuces pour l'instant
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
-    <div class="mt-6">
-        <div class="bg-gray-900/50 rounded-lg p-4">
-            {{$postsbruillon->appends(Request::except('page'))->links()}}
-        </div>
-    </div>
-</div>
+                                            <div class="mt-6">
+                                                <div class="bg-gray-900/50 rounded-lg p-4">
+                                                    {{$postsbruillon->appends(Request::except('page'))->links()}}
+                                                </div>
+                                            </div>
+                                        </div>
                                 @endif
 
                     </div>
