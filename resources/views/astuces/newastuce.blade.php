@@ -166,7 +166,7 @@
 				<div class="invalid-feedback">
 				
 				</div>
-				<div class="">
+				<!--div class="">
 						<small>
 							Pour la <strong>surbrillance des codes sources</strong> utiliser cette exemple dans votre contenus
 						</small>
@@ -174,7 +174,7 @@
 
 
 					
-				</div>
+				</div-->
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
