@@ -54,7 +54,7 @@ class AstucesControllers extends Controller
 
         return view ('astuces.newastuce',[
             'categories'=>Categorie::where('status',false)->select('id','titre','description','couleur','image', 'svg')->get(),
-            'tags'=>Tag::where('status',false)->select('id','nom')->get(),
+            'tags'=>Tag::where('status',false)->orderBy("nom","asc")->select('id','nom')->get(),
         "astuce"=>new Astuce()]);
         
     }
