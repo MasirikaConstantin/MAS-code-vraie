@@ -8,14 +8,13 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
     <title>@yield('titre' ,env("APP_NAME"))</title>
-<!--
-@ if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-@ vite(['resources/css/app.css', 'resources/js/app.js'])
-@ else
+
+@if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@else
 <style>
 </style>
-@ endif
--->
+@endif
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="{{asset('prism.css')}}">

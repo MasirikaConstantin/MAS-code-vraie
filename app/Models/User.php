@@ -59,6 +59,15 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function astuce()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function imageUrlAstuces(){
+        return $this->image ? asset('storage/' . $this->image) : null;
+        //return Storage::disk('public')->url($this->image); 
+    }
     public function com()
     {
         return $this->hasMany(Commentaire::class);
