@@ -53,4 +53,10 @@ class Astuce extends Model
     {
         return $this->hasMany(Reaction::class);
     }
+
+    public function images()
+{
+    return $this->hasMany(AstuceImage::class);
+}
+
 }

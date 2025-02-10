@@ -29,7 +29,20 @@
 <meta name="apple-mobile-web-app-title" content="Mas Code Product">
 <meta name="msapplication-TileImage" content="{{ asset('mas product.png') }}">
 <meta name="msapplication-TileColor" content="#E11308">
+<style>
+    .ql-code-block-container {
+        background-color: #4f4848;
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+        overflow-x: auto; /* Ajoute une barre de défilement horizontale si nécessaire */
+        font-size: 12px;
+    }
 
+    .ql-code-block-container code {
+        font-family: monospace;
+    }
+</style>
 @extends('base')
 @section('contenus')
 @section('section',"")
@@ -428,7 +441,12 @@
 
 
 
-
+<script>
+    // Appliquer Prism.js après le chargement du contenu
+    document.addEventListener('DOMContentLoaded', function () {
+        Prism.highlightAll();
+    });
+</script>
 
 
 

@@ -23,6 +23,7 @@
         "@tiptap/starter-kit": "^2.9.1",
         "babel-plugin-prismjs": "^2.1.0",
         "flowbite-typography": "^1.0.4",
-        "prismjs": "^1.29.0"
+        "prismjs": "^1.29.0",
+        "quill-image-resize-module": "^3.0.0"
     }
 }

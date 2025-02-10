@@ -1,7 +1,9 @@
 @extends('base')
 @section('titre', $astuce->exists ? 'Editer une Astuce' : 'Créer une Astuce')
 @section('section', $astuce->exists ? 'Editer une Astuce' : 'Créer une Astuce')
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
 @section('contenus')
 <section class="py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +36,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="bg-gray-800 rounded-lg shadow-sm">
         <div class="p-6">
-            <form action="{{ route($astuce->exists ? 'astuces.editastuce' : 'astuces.new', $astuce) }}" 
+            <form  id="blogForm" action="{{ route($astuce->exists ? 'astuces.editastuce' : 'astuces.new', $astuce) }}" 
                   method="POST" 
                   enctype="multipart/form-data"
                   class="space-y-6">
@@ -137,25 +139,27 @@
                     @enderror
                 </div>
 
-                <div>
-                    <label for="contenus" 
-					@error('contenus')
-							class="block mb-2 text-sm font-medium text-red-700 dark:text-red-500"
-						@enderror
-						class="block text-sm font-medium text-gray-200">
-                        Contenus <span class="text-red-500">*</span>
+               
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="contenus">
+                        Contenu
                     </label>
-                    <textarea id="tiny"
-                              name="contenus"
-                              rows="15"
-							  @error('contenus')
-								  class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
-							  @enderror
-                              class="mt-1 block w-full bg-gray-700 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">{{ old('contenus', $astuce->contenus) }}</textarea>
-                    @error('contenus')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <input type="hidden" name="contenus" id="contenus" value="{{ old('contenus', $astuce->contenus) }}">
+                            
+                    <!-- Editor Container -->
+                    <div class="mt-3 bg-white">
+                        <div id="editor" class="bg-white text-gray-900 rounded-lg min-h-[300px]">
+                        </div>
+                    </div>
+                    @error("contenus")
+                        <div class="p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <span class="font-medium">Erreur alert!</span> {{ $message }}.
+                        </div>
                     @enderror
                 </div>
+
+                
+
                 <small>
                     Avant de publier votre code s'il contient du code source veillez le prévisualiser
                 </small>
@@ -272,5 +276,71 @@
 	});
 	</script>
 @endpush
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
+<script>
+    // Initialisez Quill avec le module de redimensionnement
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link', 'image', 'code-block'],
+                ['clean']
+            ],
+            // Ajoutez le module de redimensionnement d'images
+            imageResize: {
+                modules: ['Resize', 'DisplaySize'] // Options disponibles
+            }
+        },
+        placeholder: 'Entrer du contenu plus stylé ici ** Obligatoire **'
+    });
 
-@endsection
+    // Gestionnaire d'images pour l'upload
+    quill.getModule('toolbar').addHandler('image', function() {
+        let input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = async function() {
+            let file = input.files[0];
+            let formData = new FormData();
+            formData.append("image", file);
+
+            try {
+                let response = await fetch("{{ route('upload.image') }}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    }
+                });
+
+                let data = await response.json();
+                if (data.success) {
+                    let range = quill.getSelection();
+                    quill.insertEmbed(range.index, 'image', data.url);
+                }
+            } catch (error) {
+                console.error("Erreur lors de l'upload", error);
+            }
+        };
+    });
+
+    // Récupérer les anciennes données
+    const oldContent = document.getElementById('contenus').value;
+    if (oldContent) {
+        quill.root.innerHTML = oldContent;
+    }
+
+    // Méthode pour soumettre le formulaire
+    document.getElementById('blogForm').onsubmit = function() {
+        var contenus = quill.root.innerHTML;
+        document.getElementById('contenus').value = contenus;
+        return true;
+    };
+</script>@endsection

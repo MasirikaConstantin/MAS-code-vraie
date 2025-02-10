@@ -12,6 +12,7 @@ use App\Http\Controllers\EnregistrementController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageUploadController;
 
 use App\Http\Controllers\NewsController;
 
@@ -48,6 +49,8 @@ Route::middleware('rolemanager:utilisateur,admin')->group(function () {
 
     
 });
+
+Route::post('/upload-image', [ImageUploadController::class, 'upload'])->name('upload.image');
 
 Route::prefix('blog')->name('blog.')->controller(Blogcontroller::class)->group( function () {
     
