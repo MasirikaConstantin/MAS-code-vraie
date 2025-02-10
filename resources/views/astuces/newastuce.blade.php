@@ -148,7 +148,7 @@
                             
                     <!-- Editor Container -->
                     <div class="mt-3 bg-white">
-                        <div id="editor" class="bg-white text-gray-900 rounded-lg min-h-[300px]">
+                        <div id="editor" class="bg-gray-900 text-white rounded-lg min-h-[300px]">
                         </div>
                     </div>
                     @error("contenus")
@@ -287,9 +287,12 @@
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
                 [{ 'color': [] }, { 'background': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
                 ['link', 'image', 'code-block'],
-                ['clean']
+                ['clean'],
+                [{ 'font': [] }],
+                [{ 'align': [] }],
             ],
             // Ajoutez le module de redimensionnement d'images
             imageResize: {
