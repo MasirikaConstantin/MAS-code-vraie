@@ -252,9 +252,8 @@ $k=0;
                                         <!-- Contenu Principal -->
                                         <div class="overflow-hidden">
                                             <div class="p-6 text-gray-200 prose prose-invert prose-indigo max-w-none" style="text-align: justify">
-                                                @php
-                                                    echo $astuce->contenus
-                                                @endphp
+                                                {!! Str::limit($astuce->contenus, 550) !!}
+
                                             </div>
                                         </div>
                             
