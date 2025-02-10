@@ -192,7 +192,7 @@
           <figure><img src="{{ $astuce->imageUrlAstuce() }}" alt="">
         </figure>
           @endif
-          <h4 class=" text-white text-l">{!! $astuce->contenus !!}</h4>
+          <h4 class=" text-white text-l" style="color: white !important">{!! $astuce->contenus !!}</h4>
           <p>
                 @if ($astuce->codesource)
                   <pre style="" class="border border-5  mt-5 " ><code class="{{$class}}">{{($astuce->codesource)}}</code></pre>
