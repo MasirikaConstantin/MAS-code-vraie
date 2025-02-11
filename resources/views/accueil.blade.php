@@ -1,7 +1,8 @@
 @extends('base')
 @section('titre','Forum')
 @section('contenus')
-@section('section','    ')
+@section('section','')
+
 <div class="bg-gradient-to-r rounded rounded-xl from-blue-900 via-blue-900 to-blue-700 text-white py-2">
     <div class="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
         <h1 class="text-4xl font-bold mb-4">Forum Actualités</h1>
@@ -32,7 +33,7 @@
             @endif
             
             <div class="flex-1">
-                <a href="{{route('user.show',['nom'=>Str::lower($titre1),'post'=>$recent])}}" class="block hover:text-blue-600 transition">
+                <a href="{{route('user.show',['nom'=>Str::lower($titre1)])}}" class="block hover:text-blue-600 transition">
                     <h3 class="font-semibold text-gray-300">{{$recent->users->name}}</h3>
                               <p class="text-gray-100 mt-1"> {{ Str::limit($recent->contenus,130) }} </p>
                 </a>
@@ -117,7 +118,7 @@
                     <span>{{$post->views_count}} {{$post->views_count > 1 ? 'vues' : 'vue'}}</span>
                     <span>Par : <i class="text-gray-100" >{{$post->users->name}}</i></span>
                     <p>Publié le : <span class="text-gray-200">{{ $post->created_at->translatedFormat('d F Y') }}</span></p>                </div>
-                <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}" 
+                <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}" 
                    class="text-blue-600 hover:text-blue-800 font-medium">
                     Lire la suite →
                 </a>

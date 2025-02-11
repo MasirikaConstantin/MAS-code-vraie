@@ -11,7 +11,6 @@ $k=0;
   setlocale(LC_TIME,'fr_FR.utf8');
   \Carbon\Carbon::setLocale('fr');
 @endphp
-@ dd($savedPosts)
     <style>
         @keyframes glow {
             0% { box-shadow: 0 0 5px #4f46e5; }
@@ -214,7 +213,7 @@ $k=0;
                                                     <p class="text-gray-500">Publié le: {{$post->updated_at->formatLocalized(' %d %B %Y')}}</p>
                                                     <p class="text-gray-500">Créer par: {{$post->users->name}}</p>
                                                     
-                                                    <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}" class="text-indigo-400 hover:text-indigo-300 transition-colors block mt-2">
+                                                    <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}" class="text-indigo-400 hover:text-indigo-300 transition-colors block mt-2">
                                                         Lire la suite
                                                     </a>
 
@@ -273,7 +272,15 @@ $k=0;
                                                         <div class="relative w-5 h-5">
                                                             <div class="absolute inset-0 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
                                                         </div>
+                                                        
                                                     </div>
+                                                    <a href="{{route('astuces.previsualiser',['astuce'=>$astuce->slug])}}" 
+                                                        class="inline-flex items-center px-4 py-2 bg-indigo-600/20 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-600 hover:text-white transition-all duration-300 group">
+                                                         Prévisualiser
+                                                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                                         </svg>
+                                                     </a>
                                                 </div>
                                             @endif
                             
@@ -284,6 +291,7 @@ $k=0;
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                                                 </svg>
                                             </a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -356,7 +364,7 @@ $k=0;
                                                                                 <i class="bi bi-pencil-square mr-2"></i>
                                                                                 Editer
                                                                             </a>
-                                                                            <a href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}"
+                                                                            <a href="{{route('user.show',['nom'=>$post->slug])}}"
                                                                             class="inline-flex items-center px-4 py-2 bg-gray-600/20 border border-gray-500 text-gray-400 rounded-lg hover:bg-gray-600 hover:text-white transition-all duration-300">
                                                                                 <i class="bi bi-eye mr-2"></i>
                                                                                 Voir

@@ -38,7 +38,7 @@ class AstucesControllers extends Controller
             
                 return view ('astuces.astuces',
                 [
-                    'astuces' => $query->orderByDesc('id')->paginate(4),
+                    'astuces' => $query->orderByDesc('id')->where('etat',1)->paginate(4),
                     'categories' => Categorie::select('id','titre','description','couleur','image', 'svg')->get(),
                     'input'=>$request->validated()
                 ]);
@@ -154,6 +154,8 @@ class AstucesControllers extends Controller
     {
 
 
+        $request->merge(['astuce_id' => $astuce->id]);
+
         $videos=$request->validated('video');
         if($videos){
             if(str_contains($videos,'https://www')){
@@ -191,4 +193,29 @@ class AstucesControllers extends Controller
             CommentaireAstuce::create($comment->validated());
             return back()->with("success","Vous avez commenter cette Astuces");
         }
+
+    public function previsualiser(string $astuce){
+        
+        $lastuce =Astuce::where("slug",$astuce)->firstOrFail();
+        if(Auth::user()){
+            if (Auth::user()->id != $lastuce->user_id) {
+                abort(404); // Retourne une erreur 404
+                }
+        }else{
+            abort(404); // Retourne une erreur 404
+
+        }
+        
+    
+    if ($lastuce->slug != $astuce) {
+        return to_route('index');
+    }
+
+   
+
+        return view('user.visualiser',[
+            'astuce'=>$lastuce,'ast1'=>Astuce::where("id",'<>',$lastuce->id)->with('users')->where('categorie_id',$lastuce->categorie_id)->where('etat',true)->get(),
+            'commentaires'=> $lastuce->comments()->orderBy('created_at', 'desc')->paginate(5)
+        ]);
+    }
 }

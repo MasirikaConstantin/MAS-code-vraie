@@ -1,5 +1,7 @@
 @extends('base')
 @section('contenus')
+@section('titre',"Modifier le Post")
+
 
 <main class="flex-1 mt-20 bg-gray-900 min-h-screen">
     <div class="container mx-auto px-4 py-8">
@@ -9,6 +11,9 @@
             </h1>
         </div>
 
+        @error("slug")
+            {{ $message }}
+        @enderror
         <form method="post" enctype="multipart/form-data" class="space-y-6">
             @csrf
             

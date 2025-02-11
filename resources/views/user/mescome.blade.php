@@ -46,7 +46,7 @@ use Illuminate\Support\Str;
     <div class=" bd-placeholder-img flex-shrink-0 me-2 rounded mes bg-body" >
 
     </div>
-    <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$comm->post])}}"class="nav-link">
+    <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}"class="nav-link">
     <p class="pb-3 mb-0 small lh-sm border-bottom">
       <strong class="d-block text-body"> {{$comm->post->titre}} </strong>
       {{Str::limit($comm->contenus,150)}}

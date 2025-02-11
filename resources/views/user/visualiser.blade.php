@@ -1,37 +1,4 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ $astuce->titre }} - Mas Code Product</title>
-<meta name="description" content="{{ $astuce->description }}" />
-<meta name="keywords" content="{{ implode(', ', $astuce->tags->pluck('nom')->toArray()) }}" />
-<meta name="author" content="{{ mb_strtoupper($astuce->users->name, 'UTF-8') }}" />
-<meta name="robots" content="all">
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:site_name" content="Mas Code Product" />
-<meta name="msvalidate.01" content="F61941C03B23140DCAE7F648A3DEE7E6" />
-<meta name="X-CSRF-TOKEN" content="{{ csrf_token() }}">
-<meta property="og:type" content="article" />
-<meta property="og:title" content="{{ mb_strtoupper($astuce->titre, 'UTF-8') }}" />
-<meta property="og:description" content="{{ $astuce->description }}" />
-<meta property="og:url" content="{{route('user.show',['nom'=>Str::lower($astuce->slug),'post'=>$astuce])}}" />
-<meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="article:author" content="{{ mb_strtoupper($astuce->users->name,'UTF-8') }}" />
-<meta property="article:tag" content="{{ implode(', ', $astuce->tags->pluck('nom')->toArray()) }}" />
-<meta property="article:published_time" content="{{ $astuce->created_at->toIso8601String() }}" />
-<meta property="article:modified_time" content="{{ $astuce->updated_at->toIso8601String() }}" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@Mascodeproduct" />
-<meta name="twitter:creator" content="{{ '@'.$astuce->users->name }}" />
-<meta name="twitter:title" content="{{ $astuce->titre }}" />
-<meta name="twitter:description" content="{{ $astuce->description }}" />
-<meta name="twitter:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Mas Code Product">
-<meta name="msapplication-TileImage" content="{{ asset('mas product.png') }}">
-<meta name="msapplication-TileColor" content="#E11308">
+
 <style>
     .ql-code-block-container {
         background-color: #4f4848;
@@ -83,21 +50,11 @@
     
  
 
-<main class="flex flex-col md:flex-row gap-8">
+<main class="">
   
-  <div class="w-full md:w-2/3  p-6 rounded-lg shadow-md ">
+  <div class="w-full   p-6 rounded-lg shadow-md ">
       <article class="mx-auto w-full  max-w-2xl format format-sm sm:format-base lg:format-lg format-blue adrks:format-invert">
-        @if (session('success'))
-        <div class="bg-green-100 mb-4 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
-            <h3>{{session('success')}}</h3>
-        </div>
-      @endif
       
-      @guest
-        <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-3">
-            Se connecter avant de commenter ce post
-        </div>
-      @endguest
           <header class="mb-4 lg:mb-6 not-format">
               <address class="flex items-center mb-6 not-italic">
                   <div class="inline-flex items-center mr-3 text-sm text-gray-900 adrks:text-white">
@@ -210,24 +167,7 @@
           <figure><img src="{{ $astuce->imageUrlAstuce() }}" alt="">
         </figure>
           @endif
-          <form action="{{ route('enregistrements.store', $astuce) }}" method="POST">
-              @csrf
-              @if (auth()->user()->savedPosts->contains($astuce))
-              <button type="button" class="text-green-500 hover:text-green-700 cursor-not-allowed" disabled>
-                Déjà enregistré
-            </button>
-                @else
-
-              <button type="submit" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
-                <svg class="w-[20px] h-[20px] mr-4 text-amber-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6"/>
-                  </svg>
-                  
-                Enregistrer ce post
-                </button>
-            
-                @endif
-          </form>
+          
           <div class=" text-white text-l" style="color: white !important">{!! $astuce->contenus !!}</div>
           <p>
                 @if ($astuce->codesource)
@@ -264,61 +204,11 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-lg lg:text-2xl font-bold text-gray-200 dark:text-white">Discussion</h2>
         </div>
-
-        <!-- Formulaire de commentaire -->
-        <form method="POST" class="mb-6">
-            @csrf
-            @auth
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="astuce_id" value="{{ $astuce->id }}">
-            @endauth
-
-            <div class="py-2 px-4 mb-4 bg-gray-400 rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                <label for="comment" class="sr-only">Votre commentaire</label>
-                <textarea name="contenus" rows="3" class="px-0 w-full bg-gray-400 text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800" placeholder="Écrivez un commentaire... (*)" required>{{ old('contenus') }}</textarea>
-            </div>
-            @error("contenus")
-                <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>
-                        <span class="font-medium">Erreur !</span> {{ $message }}
-                    </div>
-                </div>
-            @enderror
-
-            <div class="py-2 px-4 mb-4 bg-gray-400 rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                <label for="codesource" class="sr-only">Code source</label>
-                <textarea name="codesource" rows="3" class="px-0 w-full bg-gray-400 text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800" placeholder="Code Source (Facultatif)">{{ old('codesource') }}</textarea>
-            </div>
-            @error("codesource")
-                <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>
-                        <span class="font-medium">Erreur !</span> {{ $message }}
-                    </div>
-                </div>
-            @enderror
-
-            @auth
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Commenter
-                </button>
-            @endauth
-            @guest
-                <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-3">
-                    <a href="{{ route('login') }}">Se connecter avant de commenter cette astuce</a>
-                </div>
-            @endguest
-        </form>
-
+            
+            
+        
         <!-- Liste des commentaires -->
-        @foreach ($commentaires as $comm)
+        @forelse ($commentaires as $comm)
             <article class="p-6 mb-6 text-base bg-gray-800 rounded-lg ">
                 <footer class="flex justify-between items-center mb-2">
                     <div class="flex items-center">
@@ -369,7 +259,23 @@
                     @endif
                 </p>
             </article>
-        @endforeach
+            @empty
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-4">
+                <div class="flex items-center gap-3 text-amber-400">
+                    <!-- Icône d'avertissement -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    
+                    <span>Aucun commentaire</span>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+         @endforelse 
+
 
         <!-- Pagination des commentaires -->
         <div class="mb-6">
@@ -380,54 +286,6 @@
       </article>
   </div>
 
-
-
-  <div aria-label="Related articles" class="w-full md:w-full lg:w-4/12">
-    <div class="sticky top-4">
-      <div class="bg-gray-700 p-3 rounded-lg shadow-md">
-        <div class="mt-6">
-          <h2 class="text-xl font-bold mb-4">Autres publications</h2>
-        </div>
-        <div class="space-y-2">
-          @forelse ($ast1 as $t)
-            <a href="{{ route('astuces.shoastuce', ['nom' => $t->slug, 'astuce' => $t->id]) }}" class="block group hover:bg-slate-800 p-4 rounded-lg transition-all">
-              <div class="flex items-center gap-2">
-                <div class="w-12 h-12 rounded-lg text-indigo-400">
-                  @if ($t->image)
-                      <img src="{{ $t->imageUrlAstuce() }}" class="rounded-lg mr-3" alt="" srcset="">
-                  @else
-                  {!! $t->category->svg !!}
-                  @endif
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-white font-medium group-hover:text-indigo-400 transition-colors">
-                    {{ Str::limit($t->titre,30) }}
-                  </h3>
-                  <p class="text-slate-400 text-sm mt-1">
-                    {{ Str::limit($astuce->description, 80) }}
-                  </p>
-                </div>
-              </div>
-            </a>
-          @empty
-            @foreach ($ast2 as $d)
-              <div class="bg-slate-800 p-4 rounded-lg">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 text-indigo-400">
-                    {!! $d->category->svg !!}
-                  </div>
-                  <div>
-                    <h3 class="text-white font-medium">{{ $d->titre }}</h3>
-                    <p class="text-slate-400 text-sm">Brève description</p>
-                  </div>
-                </div>
-              </div>
-            @endforeach
-          @endforelse
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 </main>

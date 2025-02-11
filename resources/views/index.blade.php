@@ -246,7 +246,7 @@
 
 
         <!-- Card 1 -->
-        <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}"
+        <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}"
           class="block group relative h-[280px] bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
            <!-- Category Badge -->
            <div class="absolute top-3 left-3 z-10">

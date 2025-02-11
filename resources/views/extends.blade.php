@@ -202,7 +202,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
                               
                             <p class="text-muted" >Créer par  : {{$post->users->name}} </p>
                               
-                                <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}" class="icon-link gap-1 icon-link-hover stretched-link" >Lire la suite</a>
+                                <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}" class="icon-link gap-1 icon-link-hover stretched-link" >Lire la suite</a>
                             </p> 
                            
                       <p><small> {{ $post->views_count }}   @if($post->views_count>1)vues @else vue @endif</small></p>
@@ -315,7 +315,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
                         <a class="btn  shadow-lg p-1 bg-body me-2 " href="{{route('user.modif',['post'=>$post->id])}}">
                           <i class="bi bi-pencil-square me-2"></i> <strong> Editer</strong>
                         </a>
-                        <a class="btn  shadow-lg p-1 bg-body" style="border: 1px rgb(136, 94, 94) solid" href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}">
+                        <a class="btn  shadow-lg p-1 bg-body" style="border: 1px rgb(136, 94, 94) solid" href="{{route('user.show',['nom'=>$post->slug])}}">
                           <i class="bi bi-eye  me-1 " style="margin-left: 12px !important " ></i>  <strong>Voir</strong>
                         </a>
                       </div>

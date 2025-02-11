@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostValidate extends FormRequest
 {
@@ -29,7 +30,7 @@ class PostValidate extends FormRequest
             'contenus'=> ['required', 'min:4'],
             'user_id'=> ['required', 'exists:users,id'],
             'image'=> ['image', 'max:3000'],
-            'slug'=>['required', 'min:8' ,'regex:/^[0-9a-z\-]+$/', 'unique:posts,slug'],
+            'slug' => ['required', 'min:8' ,'regex:/^[0-9a-z\-]+$/', Rule::unique('posts', 'slug')->ignore($this->post?->id)],  
             'codesource'=>[ 'nullable'],
             'categorie_id'=>['required', 'exists:categories,id'],
             'tags'=>['array', 'exists:tags,id','required'],
@@ -39,19 +40,10 @@ class PostValidate extends FormRequest
 
         ];
     }
-    //'categorie_id'=> ['required', 'exists:categories,id'],
-/*
+    
 protected function prepareForValidation(){
     $this->merge([
-        'slug'=>$this->input('slug')?: Str::slug($this->input('titre'))
-
-        ]);
-}
-*/
-
-protected function prepareForValidation(){
-    $this->merge([
-        'slug' => $this->input('slug') ?: Str::slug($this->input('titre') . '-' . Carbon::now()->format('Y-m-d-H-i-s'))
+        'slug' => $this->input('slug') ?: Str::slug($this->input('titre')) //. '-' . Carbon::now()->format('Y-m-d-H-i-s'))
     ]);
 }
 }

@@ -151,28 +151,31 @@ class UserControl extends Controller
         }}
         return back();
 }
-    public function update(Post $post, PostValidate $request){
-        $data=$request->validated();
-        $image=$request->validated('image');
-        if($image == null || $image->getError()){
-            $post->update($data);
-            $post->tags()->sync($request->validated('tags'));
+public function update(Post $post, PostValidate $request)
+{
+    // Passer l'ID du post à la request pour la validation
+    $request->merge(['post_id' => $post->id]);
 
-            return redirect()->route('dashboard');
+    $data = $request->validated();
+    $image = $request->validated('image');
 
-        }
-        if($post->image){
-            Storage::disk('public')->delete($post->image);
-
-        }
-        $data['image']=$image->store('imagePost','public');
-
+    if ($image == null || $image->getError()) {
         $post->update($data);
-
         $post->tags()->sync($request->validated('tags'));
-        
+
         return redirect()->route('dashboard');
     }
+
+    if ($post->image) {
+        Storage::disk('public')->delete($post->image);
+    }
+
+    $data['image'] = $image->store('imagePost', 'public');
+    $post->update($data);
+    $post->tags()->sync($request->validated('tags'));
+
+    return redirect()->route('dashboard');
+}
 
     public function all(){
 
@@ -184,9 +187,9 @@ class UserControl extends Controller
 
 
 
-    public function show(string $nom, string $id, Request $requette)
+    public function show(string $nom)
 {
-    $post = Post::findOrFail($id);
+    $post = Post::where('slug',$nom)->firstOrFail();
     $cat=$post['categorie_id'];
     $autres = Post::where("categorie_id",$cat)->paginate(4);
 

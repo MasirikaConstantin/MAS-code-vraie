@@ -77,7 +77,7 @@ use Illuminate\Support\Str;
                         <p class="mt-1">Par : {{$post->user->name}}</p>
                     </div>
                     <p class="mt-4 text-gray-100">{{substr($post->contenus,0,200)}}</p>
-                    <a href="{{route('user.show',['nom'=>Str::lower($titre),'post'=>$post])}}" 
+                    <a href="{{route('user.show',['nom'=>Str::lower($titre)])}}" 
                         class="mt-4 inline-block text-indigo-600 hover:text-indigo-700">
                         Lire la suite →
                     </a>

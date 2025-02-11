@@ -13,7 +13,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="{{ mb_strtoupper($post->titre, 'UTF-8') }}" />
 <meta property="og:description" content="{{ $post->description }}" />
-<meta property="og:url" content="{{route('user.show',['nom'=>Str::lower($post->slug),'post'=>$post])}}" />
+<meta property="og:url" content="{{route('user.show',['nom'=>Str::lower($post->slug)])}}" />
 <meta property="og:image" content="{{ $post->imageUrl() ? $post->imageUrl() : asset('mas product.png') }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -593,7 +593,7 @@ setlocale(LC_TIME,'fr_FR.utf8');
 
           <article class="max-w-xs">
             @if($aut->image)
-                <a href="{{route('user.show',['nom'=>Str::lower($aut->slug),'post'=>$aut])}}">
+                <a href="{{route('user.show',['nom'=>Str::lower($aut->slug)])}}">
                   <img src="{{$aut->imageUrl()}}" class="mb-5 rounded-lg" alt="Image 1">
               </a>
 
@@ -613,10 +613,10 @@ setlocale(LC_TIME,'fr_FR.utf8');
 
             
             <h2 class="mb-2 text-xl font-bold leading-tight text-gray-200 adrks:text-white">
-                <a href="{{route('user.show',['nom'=>Str::lower($aut->slug),'post'=>$aut])}}"> {{Str::limit($aut->titre,20)}} </a>
+                <a href="{{route('user.show',['nom'=>Str::lower($aut->slug)])}}"> {{Str::limit($aut->titre,20)}} </a>
             </h2>
             <p class="mb-4 text-gray-100 adrks:text-gray-400">{{Str::limit($aut->contenus,100)}}</p>
-            <a href="{{route('user.show',['nom'=>Str::lower($aut->slug),'post'=>$aut])}}" class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 adrks:text-primary-500 hover:no-underline">
+            <a href="{{route('user.show',['nom'=>Str::lower($aut->slug)])}}" class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 adrks:text-primary-500 hover:no-underline">
                 Lire la suite
             </a>
         </article>

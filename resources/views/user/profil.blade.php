@@ -134,7 +134,7 @@
                                 <span class="text-blue-400">{{ $post->created_at->diffForHumans() }}</span>
                                 <span class="text-gray-500">|</span>
                                 <span class="text-purple-400">{{ $post->category->titre }}</span>
-                                <a href="{{route('user.show',['nom'=>$post->slug,'post'=>$post])}}" 
+                                <a href="{{route('user.show',['nom'=>$post->slug])}}" 
                                     class="inline-block text-indigo-600 hover:text-indigo-700">
                                     Lire la suite →
                                 </a>

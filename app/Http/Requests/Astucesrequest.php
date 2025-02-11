@@ -5,6 +5,7 @@ use Carbon\Carbon;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class Astucesrequest extends FormRequest
 {
@@ -32,7 +33,7 @@ class Astucesrequest extends FormRequest
             'image'=> ['image', 'max:3000'],
 
                 'tags'=>['array', 'exists:tags,id','required'],
-                'slug'=>['required'],
+                'slug' => ['required', 'min:8' ,'regex:/^[0-9a-z\-]+$/', Rule::unique('posts', 'slug')->ignore($this->astuce?->id)],  
                 'contenus'=>['required', 'min:20'],
                 'user_id'=> ['required', 'exists:users,id'],
                 'categorie_id'=>['required', 'exists:categories,id'],
@@ -46,7 +47,7 @@ class Astucesrequest extends FormRequest
     */
     protected function prepareForValidation(){
         $this->merge([
-            'slug' => $this->input('slug') ?: Str::slug($this->input('titre') . '-' . Carbon::now()->format('H-i-s'))
+            'slug' => $this->input('slug') ?: Str::slug($this->input('titre') )//. '-' . Carbon::now()->format('H-i-s'))
     
             ]);
     }

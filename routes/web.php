@@ -19,7 +19,7 @@ use App\Http\Controllers\NewsController;
 
 Route::get('/', function () {
     return view('index',[
-        'posts'=>Post::paginate(6)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
+        'posts'=>Post::orderBy("created_at",'desc')->paginate(8)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
         'astuces'=>Astuce::orderBy('id','desc')->where('etat',true)->paginate(6),
         'categories' => Categorie::where('status', 0)->orderBy('titre', 'asc')->get()
 
@@ -75,8 +75,7 @@ Route::prefix('user')->name('user.')->controller(UserControl::class)->group(func
     Route::post('/{post}/modifier','update');
 
 
-    Route::get('/lire/{nom}-{post}','show')->where([
-        'post'=>'[0-9]+',
+    Route::get('/lire/{nom}','show')->where([
         'nom'=>'[a-zA-Z0-9\-]+'
     ])->name('show');
 
@@ -169,6 +168,10 @@ Route::prefix('astuces')->name('astuces.')->middleware(['auth'])->controller(Ast
     Route::post('/edit/{astuce}','update');
 });
 
+Route::get('/previsualiser/{astuce}',[AstucesControllers::class, 'previsualiser'])->where([
+    'nom'=>'[a-zA-Z0-9\-]+'
+])->name("astuces.previsualiser");
+
 Route::get('astuces/{nom}-{astuce}',[AstucesControllers::class, 'show'])->where([
     'astuce'=>'[0-9]+',
 'nom'=>'[a-zA-Z0-9\-]+'
@@ -186,3 +189,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/enregistrer', [EnregistrementController::class, 'store'])->name('enregistrements.store');
     Route::delete('/enregistrements/{post}', [EnregistrementController::class, 'destroy'])->name('enregistrements.destroy');
 });
+
