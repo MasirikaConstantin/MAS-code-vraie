@@ -382,58 +382,48 @@
 
 
 
-
-
-<div aria-label="Related articles" class="w-1/6 md:w-1/3">
-  <div class="sticky top-4">
-    <div class="mt-6"></div>
-    <div class="mt-6"></div>
-
-        <div class="bg-gray-700 p-6 rounded-lg shadow-md">
-    <div class="mt-6"></div>
-    <div class="mt-6"></div>
-    <div class="mt-6"></div>
-    <div class="mt-6">
-        <h2 class="text-xl font-bold mb-4">Autres publications</h2>
-
+  <div aria-label="Related articles" class="w-full md:w-full lg:w-4/12">
+    <div class="sticky top-4">
+      <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+        <div class="mt-6">
+          <h2 class="text-xl font-bold mb-4">Autres publications</h2>
+        </div>
+        <div class="space-y-4">
+          @forelse ($ast1 as $t)
+            <a href="{{ route('astuces.shoastuce', ['nom' => $t->slug, 'astuce' => $t->id]) }}" class="block group hover:bg-slate-800 p-4 rounded-lg transition-all">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 text-indigo-400">
+                  {!! $astuce->category->svg !!}
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-white font-medium group-hover:text-indigo-400 transition-colors">
+                    {{ $t->titre }}
+                  </h3>
+                  <p class="text-slate-400 text-sm mt-1">
+                    {{ Str::limit($astuce->description, 150) }}
+                  </p>
+                </div>
+              </div>
+            </a>
+          @empty
+            @foreach ($ast2 as $d)
+              <div class="bg-slate-800 p-4 rounded-lg">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 text-indigo-400">
+                    {!! $d->category->svg !!}
+                  </div>
+                  <div>
+                    <h3 class="text-white font-medium">{{ $d->titre }}</h3>
+                    <p class="text-slate-400 text-sm">Brève description</p>
+                  </div>
+                </div>
+              </div>
+            @endforeach
+          @endforelse
+        </div>
+      </div>
     </div>
-
-
-            <div class="space-y-4">
-                @forelse ($ast1 as $t)
-                    <a href="{{ route('astuces.shoastuce', ['nom' => $t->slug, 'astuce' => $t->id]) }}" class="block group hover:bg-slate-800 p-4 rounded-lg transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 text-indigo-400">
-                                {!! $astuce->category->svg !!}
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-white font-medium group-hover:text-indigo-400 transition-colors">
-                                    {{ $t->titre }}
-                                </h3>
-                                <p class="text-slate-400 text-sm mt-1">
-                                    {{ Str::limit($astuce->description, 150) }}
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                @empty
-                    @foreach ($ast2 as $d)
-                        <div class="bg-slate-800 p-4 rounded-lg">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 text-indigo-400">
-                                    {!! $d->category->svg !!}
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-medium">{{ $d->titre }}</h3>
-                                    <p class="text-slate-400 text-sm">Brève description</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforelse
-            </div>
   </div>
-</div>
 
 
 </main>
