@@ -113,10 +113,10 @@ class AstucesControllers extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $nom , string $astuce)
+    public function show(string $nom)
     {
         $m=[];
-        $l=Astuce::findOrFail($astuce);
+        $l = Astuce::where('slug',$nom)->firstOrFail();
        //dd($l->slug);
     if ($l->slug != $nom) {
         return to_route('index');

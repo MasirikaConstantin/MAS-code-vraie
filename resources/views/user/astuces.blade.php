@@ -13,7 +13,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="{{ mb_strtoupper($astuce->titre, 'UTF-8') }}" />
 <meta property="og:description" content="{{ $astuce->description }}" />
-<meta property="og:url" content="{{route('user.show',['nom'=>Str::lower($astuce->slug),'post'=>$astuce])}}" />
+<meta property="og:url" content="{{ route('astuces.shoastuce', ['nom' => $astuce->slug]) }}" />
 <meta property="og:image" content="{{ $astuce->imageUrlAstuce() ? $astuce->imageUrlAstuce() : asset('mas product.png') }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -390,7 +390,7 @@
         </div>
         <div class="space-y-2">
           @forelse ($ast1 as $t)
-            <a href="{{ route('astuces.shoastuce', ['nom' => $t->slug, 'astuce' => $t->id]) }}" class="block group hover:bg-slate-800 p-4 rounded-lg transition-all">
+            <a href="{{ route('astuces.shoastuce', ['nom' => $t->slug]) }}" class="block group hover:bg-slate-800 p-4 rounded-lg transition-all">
               <div class="flex items-center gap-2">
                 <div class="w-12 h-12 rounded-lg text-indigo-400">
                   @if ($t->image)

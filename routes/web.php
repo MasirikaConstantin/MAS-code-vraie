@@ -172,8 +172,7 @@ Route::get('/previsualiser/{astuce}',[AstucesControllers::class, 'previsualiser'
     'nom'=>'[a-zA-Z0-9\-]+'
 ])->name("astuces.previsualiser");
 
-Route::get('astuces/{nom}-{astuce}',[AstucesControllers::class, 'show'])->where([
-    'astuce'=>'[0-9]+',
+Route::get('astuces/{nom}',[AstucesControllers::class, 'show'])->where([
 'nom'=>'[a-zA-Z0-9\-]+'
 ])->name('astuces.shoastuce');
 

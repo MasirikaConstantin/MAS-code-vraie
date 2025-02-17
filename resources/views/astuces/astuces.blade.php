@@ -65,7 +65,7 @@
                             <p class="text-gray-400 mb-4">Par {{$astuce->users->name}}</p>
                             <p class="text-gray-300 mb-4">{{Str::limit($astuce->contenus, 200)}}</p>
                            
-                            <a href="{{route('astuces.shoastuce',['nom'=>$astuce->slug,'astuce'=>$astuce->id])}}"
+                            <a href="{{route('astuces.shoastuce',['nom'=>$astuce->slug])}}"
                                class="text-purple-400 hover:text-purple-300 transition-colors">
                                 Lire la suite →
                             </a>
