@@ -166,6 +166,8 @@ Route::prefix('astuces')->name('astuces.')->middleware(['auth'])->controller(Ast
     ])->name('mesastuces');
     Route::get('/edit/{astuce}','edit')->name('editastuce');
     Route::post('/edit/{astuce}','update');
+    Route::get('/news','creates')->name('newsans');
+
 });
 
 Route::get('/previsualiser/{astuce}',[AstucesControllers::class, 'previsualiser'])->where([

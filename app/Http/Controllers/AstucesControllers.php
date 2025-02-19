@@ -59,6 +59,16 @@ class AstucesControllers extends Controller
         
     }
 
+    public function creates()
+    {
+
+        return view ('astuces.newastuces',[
+            'categories'=>Categorie::where('status',false)->select('id','titre','description','couleur','image', 'svg')->get(),
+            'tags'=>Tag::where('status',false)->orderBy("nom","asc")->select('id','nom')->get(),
+        "astuce"=>new Astuce()]);
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      */
