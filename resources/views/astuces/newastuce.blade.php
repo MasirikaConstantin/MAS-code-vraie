@@ -278,6 +278,7 @@
 @endpush
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
+
 <script>
     // Initialisez Quill avec le module de redimensionnement
     const quill = new Quill('#editor', {
