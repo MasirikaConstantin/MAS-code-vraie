@@ -150,6 +150,8 @@
         <div class="p-6 border-b">
             <h3 class="text-xl font-semibold">Les utilisateurs</h3>
         </div>
+
+        <a href="{{ route('admin.users') }}">Utilistaeurs</a>
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800">

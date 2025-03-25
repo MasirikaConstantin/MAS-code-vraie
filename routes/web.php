@@ -144,10 +144,15 @@ Route::prefix('/admin')->controller(AdminControl::class)->name('admin.')->middle
     Route::get('/lutilisateur/{user}',"edituser")->name('edituser');
     Route::delete('/supprimer/{user}','destroy')->name('user.destroy');
 
-
+        Route::get('/users', function () {
+            return view("admin.users");
+        })->name('users');
+    
 
 
 });
+
+// routes/web.php
 
 
 Route::get('/user/contact', [UserControl::class])->name('contact1');
