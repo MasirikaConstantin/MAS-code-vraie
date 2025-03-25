@@ -141,7 +141,8 @@ Route::prefix('/admin')->controller(AdminControl::class)->name('admin.')->middle
 
     Route::get('/delete/{astuce}-{donnee}','editastuce')->name('gereredit');
     Route::get('/user-st/{user}','gestionuser')->name('gestionuser');
-
+    Route::get('/lutilisateur/{user}',"edituser")->name('edituser');
+    Route::delete('/supprimer/{user}','destroy')->name('user.destroy');
 
 
 

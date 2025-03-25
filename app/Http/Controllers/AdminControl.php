@@ -225,4 +225,16 @@ class AdminControl extends Controller
         return view("admin.gereruser",["user"=>$user,"comments"=>$commentCount,"posts" => $user->posts()->orderByDesc('created_at')->paginate(5)]);
 
     }
+
+    public function edituser(User $user){
+
+    }
+
+    public function destroy(User $user){
+        $user->delete();
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', 'Utilisateur supprimé avec succès.');
+        //dd($user);
+    }
 }
