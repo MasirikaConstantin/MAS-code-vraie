@@ -59,7 +59,7 @@ public function updatedSelectedUsers()
     public function render()
     {
         return view('livewire.users-list', [
-            'users' => User::paginate(10),
+            'users' => User::paginate(30),
         ]);
     }
 }
