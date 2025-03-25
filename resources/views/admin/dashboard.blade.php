@@ -147,11 +147,12 @@
 
     <!-- Section Utilisateurs -->
     <div class="bg-gray-800 rounded-lg shadow-md">
-        <div class="p-6 border-b">
+        <div class="flex justify-between items-center p-6 border-b" >
             <h3 class="text-xl font-semibold">Les utilisateurs</h3>
+        <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" href="{{ route('admin.users') }}">Utilistaeurs</a>
+
         </div>
 
-        <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" href="{{ route('admin.users') }}">Utilistaeurs</a>
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800">
