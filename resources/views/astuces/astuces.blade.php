@@ -74,7 +74,7 @@
                         <div class="w-full md:w-48 h-48 relative">
                             @if($astuce->image)
                                 <img src="{{$astuce->imageUrlAstuce()}}"
-                                     class="w-full h-full object-cover"
+                                     class="w-full h-full object-cover rounded rounded-lg"
                                      alt="{{$astuce->titre}}">
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-800">
