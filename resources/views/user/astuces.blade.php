@@ -186,8 +186,10 @@
               <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-200 lg:mb-6 lg:text-4xl adrks:text-white">{{$astuce->titre}}</h1>
           </header>
           @if ($astuce->image)
-          <figure><img class="w-[120px] h-[120px] center-items rounded rounded-lg" src="{{ $astuce->imageUrlAstuce() }}" alt="">
-        </figure>
+          <div class="items-center">
+            <figure><img class="w-[320px] h-[320px] center-items rounded rounded-lg" src="{{ $astuce->imageUrlAstuce() }}" alt="">
+            </figure>
+          </div>
           @endif
           <form action="{{ route('enregistrements.store', $astuce) }}" method="POST">
               @csrf
