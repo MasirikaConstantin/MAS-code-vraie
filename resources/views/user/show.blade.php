@@ -192,7 +192,10 @@ setlocale(LC_TIME,'fr_FR.utf8');
               <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-200 lg:mb-6 lg:text-4xl adrks:text-white">{{$post->titre}}</h1>
           </header>
           @if ($post->image)
-          <figure><img src="{{ $post->imageUrl() }}" alt="">
+          <div class="items-center" style="display: flex; justify-content: center; align-items: center; align-content: center !important; margin-bottom: -20">
+
+          <figure><img data-fancybox class="w-[450px] h-[450px] rounded rounded-lg" src="{{ $post->imageUrl() }}" alt="{{$post->titre}}">
+            </div>
         </figure>
           @endif
           <h4 class=" text-white text-l">{!! $post->contenus !!}</h4>
