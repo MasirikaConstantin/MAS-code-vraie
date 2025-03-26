@@ -30,6 +30,12 @@
           <a href="{{route('user.accueil')}}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Forum</a>
         </li>
         <li>
+          <a href="{{route('astuces')}}"
+            class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">
+             Astuces
+         </a>
+        </li>
+        <li>
           <a href="{{ route('news') }}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Blog</a>
         </li>
         <li class="relative">
