@@ -63,7 +63,7 @@
                            
                             <h3 class="text-xl font-bold text-white mb-2">{{$astuce->titre}}</h3>
                             <p class="text-gray-400 mb-4">Par {{$astuce->users->name}}</p>
-                            <p class="text-gray-300 mb-4">{{Str::limit($astuce->contenus, 200)}}</p>
+                            <p class="text-gray-300 mb-4">{{Str::limit(strip_tags($astuce->contenus, 200))}}</p>
                            
                             <a href="{{route('astuces.shoastuce',['nom'=>$astuce->slug])}}"
                                class="text-purple-400 hover:text-purple-300 transition-colors">
@@ -114,7 +114,7 @@
 
                         <div class="ml-4 flex-1">
                             <h4 class="text-lg font-semibold text-white mb-2">{{$category->titre}}</h4>
-                            <p class="text-gray-400 text-sm mb-4">{{Str::limit($category->description, 200)}}</p>
+                            <p class="text-gray-400 text-sm mb-4">{{Str::limit(strip_tags($category->description, 200))}}</p>
                             <a href="{{route('astuces',['category_id' => $category->id])}}"
                                class="text-purple-400 hover:text-purple-300 transition-colors">
                                 En savoir plus →
