@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Astuce;
 use App\Models\Categorie;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AstuceListe extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public function Recherche(){
         $client  = Astuce::when($this->search, function($query) {

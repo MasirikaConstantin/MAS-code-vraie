@@ -304,12 +304,7 @@ public function postdelete( Post $post,string $id ){
             $query=$query->where('categorie_id','=', $category_id );
         }
         
-            return view ('user.tous',
-            [
-                'posts' => $query->orderByDesc('id')->paginate(4),
-                'categories' => Categorie::orderBy('titre', 'asc')->get(),
-                'input'=>$request->validated()
-            ]);
+            return view ('user.tous');
         
         
 

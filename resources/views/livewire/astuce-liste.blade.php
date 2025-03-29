@@ -12,7 +12,7 @@
     <form action="" method="get" class="mt-8">
         <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
             <div class="relative">
-                <input type="text" name="titre" value="{{$input['titre']??''}}"
+                <input type="text" 
                 wire:model.live="search"
                        class="w-full h-12 bg-gray-800/50 rounded-lg border border-gray-700 text-white pl-4 pr-10 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 transition-all"
                        placeholder="Entrer un mot clé">
@@ -75,7 +75,7 @@
     </div>
 
     <!-- Catégories -->
-    <h3 class="text-2xl font-bold text-white mt-12 mb-6">Trier les catégories</h3>
+    <h3 class="text-2xl font-bold text-white mt-12 mb-6">Nos Catégories</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @foreach ($categories as $category)
             <div class="bg-gray-800/30 backdrop-blur-xl rounded-xl overflow-hidden hover:shadow-xl transition-all">
@@ -93,10 +93,7 @@
                     <div class="ml-4 flex-1">
                         <h4 class="text-lg font-semibold text-white mb-2">{{$category->titre}}</h4>
                         <p class="text-gray-400 text-sm mb-4">{{Str::limit(strip_tags($category->description, 200))}}</p>
-                        <a href="{{route('astuces',['category_id' => $category->id])}}"
-                           class="text-purple-400 hover:text-purple-300 transition-colors">
-                            En savoir plus →
-                        </a>
+                        
                     </div>
                 </div>
             </div>
