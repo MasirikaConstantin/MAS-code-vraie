@@ -128,6 +128,10 @@
     @auth
         @livewire('messenger-icon')
     @endauth
+    @guest
+    @livewire('connect')
+      
+    @endguest
     @php
     setlocale(LC_TIME,'fr_FR.utf8');
                             \Carbon\Carbon::setLocale('fr');
