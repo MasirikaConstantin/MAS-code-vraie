@@ -41,9 +41,7 @@
   $route = request()->route() ? request()->route()->getName() : 'route_inconnue';
 @endphp
 
-@if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-@vite(['resources/css/app.css', 'resources/js/app.js'])
-@endif
+
     
             <style>
                     
@@ -128,7 +126,10 @@
     @auth
         @livewire('messenger-icon')
     @endauth
-    
+    @guest
+    @livewire('connect')
+      
+    @endguest
     @php
     setlocale(LC_TIME,'fr_FR.utf8');
                             \Carbon\Carbon::setLocale('fr');
