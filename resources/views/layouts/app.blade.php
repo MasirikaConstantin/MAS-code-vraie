@@ -27,6 +27,9 @@
     </style>
     </head>
     <body class="d-flex flex-column h-100">
+        @auth
+        @livewire('messenger-icon')
+    @endauth
         <div class=" bg-body-100">
             @include('layouts.navigation')
 

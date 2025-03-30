@@ -131,4 +131,26 @@ class User extends Authenticatable
      {
          return $this->belongsToMany(Astuce::class, 'enregistrements')->withTimestamps();
      }
+
+        public function messageGroups()
+    {
+        return $this->belongsToMany(MessageGroup::class)
+            ->withPivot('is_admin', 'last_read_at')
+            ->withTimestamps();
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
+    public function sentInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'invited_by');
+    }
 }

@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="en" class="h-100" data-bs-theme="auto">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100" data-bs-theme="auto">
   <head><script src="{{asset('color-modes.js')}}"></script>
 
     <meta charset="utf-8">
+    <meta name="language" content="fr-CD">
+    <meta name="geo.region" content="CD">
+    <meta name="geo.placename" content="Kinshasa, République Démocratique du Congo">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
     <title>@yield('titre' ,env("APP_NAME"))</title>
 
 @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -40,6 +41,9 @@
   $route = request()->route() ? request()->route()->getName() : 'route_inconnue';
 @endphp
 
+@if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@endif
     
             <style>
                     
@@ -117,12 +121,13 @@
 
             </style>
 
-    
-   
+    @livewireStyles()
   </head>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <body class="bg-gray-900 text-gray-100">
-    
+    @auth
+        @livewire('messenger-icon')
+    @endauth
     @php
     setlocale(LC_TIME,'fr_FR.utf8');
                             \Carbon\Carbon::setLocale('fr');

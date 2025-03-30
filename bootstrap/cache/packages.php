@@ -59,6 +59,13 @@
       0 => 'LaravelLang\\Models\\ServiceProvider',
     ),
   ),
+  'laravel-lang/moonshine' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelLang\\MoonShine\\ServiceProvider',
+    ),
+  ),
   'laravel-lang/publisher' => 
   array (
     'providers' => 
@@ -71,6 +78,13 @@
     'providers' => 
     array (
       0 => 'LaravelLang\\Routes\\ServiceProvider',
+    ),
+  ),
+  'laravel-lang/starter-kits' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelLang\\StarterKits\\ServiceProvider',
     ),
   ),
   'laravel/breeze' => 
@@ -135,13 +149,13 @@
   ),
   'spatie/laravel-ignition' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    ),
     'aliases' => 
     array (
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
+    ),
+    'providers' => 
+    array (
+      0 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
     ),
   ),
 );
