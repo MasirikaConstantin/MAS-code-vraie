@@ -1094,6 +1094,16 @@
 	</script>
 
 <script>
+
+const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
+
+if (userId) {
+    window.Echo.private(`group.${groupId}`)
+        .listen('NewMessage', (e) => {
+            Livewire.emit('refreshMessages');
+            Livewire.emit('messageReceived');
+        });
+}
   new TomSelect('select[multiple]',{plugins:{remove_button: {title: 'Delacher'}}})
 </script>
 
