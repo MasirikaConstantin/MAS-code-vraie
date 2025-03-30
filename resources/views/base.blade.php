@@ -120,556 +120,556 @@
             </style>
 <style>
 
-/* Styles pour la messagerie */
+    /* Styles pour la messagerie */
 
-/* Icône de messagerie */
-.messenger-icon-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.messenger-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #007bff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.messenger-icon:hover {
-    transform: scale(1.05);
-    background-color: #0069d9;
-}
-
-
-
-.messenger-iconenv {
-    width: 50px;
-    height: 50px;
-    background-color: #007bff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.messenger-iconenv:hover {
-    transform: scale(1.05);
-    background-color: #0069d9;
-}
-
-.unread-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* Container de la messagerie */
-.messenger-container {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 350px;
-    height: 500px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-}
-
-@media (min-width: 768px) {
-    .messenger-container {
-        width: 700px;
-        height: 600px;
+    /* Icône de messagerie */
+    .messenger-icon-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
     }
-}
 
-@media (min-width: 992px) {
-    .messenger-container {
-        width: 850px;
-        height: 700px;
+    .messenger-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+        transition: all 0.3s ease;
     }
-}
-
-/* Composant principal de la messagerie */
-.messenger {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-.messenger-sidebar {
-    width: 280px;
-    border-right: 1px solid #e5e5e5;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f9fa;
-}
-
-.sidebar-header {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sidebar-actions {
-    display: flex;
-    gap: 5px;
-}
-
-.groups-list {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.group-item {
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    position: relative;
-}
-
-.group-item:hover {
-    background-color: rgba(0, 123, 255, 0.05);
-}
-
-.group-item.active {
-    background-color: rgba(0, 123, 255, 0.1);
-}
-
-.group-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-color: #e9ecef;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #495057;
-    font-size: 16px;
-    overflow: hidden;
-}
-
-.group-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.default-avatar {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #6c757d;
-    color: white;
-    font-weight: bold;
-}
-
-.group-info {
-    flex: 1;
-    overflow: hidden;
-}
-
-.group-name {
-    font-weight: 500;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.group-last-message {
-    font-size: 0.8rem;
-    color: #6c757d;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.messenger-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.select-chat-placeholder {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6c757d;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.messenger-info-sidebar {
-    width: 280px;
-    border-left: 1px solid #e5e5e5;
-    background-color: #f8f9fa;
-    overflow-y: auto;
-}
-
-/* Composant de chat de groupe */
-.group-chat {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.chat-header {
-    padding: 10px 15px;
-    border-bottom: 1px solid #e5e5e5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f9fa;
-}
-
-.header-actions {
-    display: flex;
-    gap: 5px;
-}
-
-.messages-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.message {
-    display: flex;
-    margin-bottom: 10px;
-    max-width: 80%;
-}
-
-.message-sent {
-    margin-left: auto;
-    flex-direction: row-reverse;
-}
-
-.message-received {
-    margin-right: auto;
-}
-
-.message-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin: 0 10px;
-}
-
-.user-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #6c757d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.message-content {
-    background-color: #f0f2f5;
-    padding: 8px 12px;
-    border-radius: 18px;
-    position: relative;
-}
-
-.message-sent .message-content {
-    background-color: #d1e7ff;
-}
-
-.message-header {
-    font-size: 0.7rem;
-    margin-bottom: 2px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.message-user {
-    font-weight: 500;
-    color: #495057;
-}
-
-.message-time {
-    color: #6c757d;
-    font-size: 0.65rem;
-}
-
-.message-text {
-    word-break: break-word;
-}
-
-.message-input {
-    padding: 10px 15px;
-    border-top: 1px solid #e5e5e5;
-    background-color: #f8f9fa;
-}
-
-/* Composant d'informations sur le groupe */
-.info-header {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.group-details {
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.group-avatar-large {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    overflow: hidden;
-}
-
-.default-avatar-large {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #6c757d;
-    color: white;
-    font-weight: bold;
-    font-size: 32px;
-}
-
-.group-description {
-    color: #6c757d;
-    margin-top: 5px;
-}
-
-.invite-section, .members-section {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.search-user {
-    position: relative;
-}
-
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 10;
-}
-
-.search-result-item {
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.search-result-item:hover {
-    background-color: #f8f9fa;
-}
-
-.user-avatar-small {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #6c757d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 12px;
-    margin-right: 8px;
-}
-
-.no-results {
-    padding: 8px 12px;
-    color: #6c757d;
-    text-align: center;
-}
-
-.members-list {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.member-item {
-    padding: 8px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.member-info {
-    display: flex;
-    align-items: center;
-}
-
-.admin-badge {
-    font-size: 0.7rem;
-    background-color: #ffc107;
-    color: #212529;
-    padding: 2px 5px;
-    border-radius: 10px;
-    margin-left: 5px;
-}
-
-.member-actions {
-    display: flex;
-    gap: 5px;
-}
-
-.bottom-actions {
-    padding: 15px;
-    text-align: center;
-}
-
-/* Composant de gestion des invitations */
-.invitations-header {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.invitations-content {
-    padding: 15px;
-}
-
-.invitation-item {
-    padding: 15px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.invitation-details {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.invitation-info {
-    flex: 1;
-}
-
-.inviter, .invitation-date {
-    font-size: 0.85rem;
-    color: #6c757d;
-}
-
-.invitation-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.no-invitations {
-    text-align: center;
-    color: #6c757d;
-    padding: 20px;
-}
-
-/* Composant de création de groupe */
-.create-group-header {
-    padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.create-group-form {
-    padding: 15px;
-    overflow-y: auto;
-    max-height: calc(100% - 60px);
-}
-
-.img-preview {
-    max-width: 100px;
-    max-height: 100px;
-    border-radius: 5px;
-}
-
-.selected-users {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.selected-user {
-    display: flex;
-    align-items: center;
-    background-color: #f0f2f5;
-    padding: 5px 10px;
-    border-radius: 15px;
-}
-
-.btn-remove {
-    background: none;
-    border: none;
-    color: #6c757d;
-    cursor: pointer;
-    font-size: 12px;
-    margin-left: 5px;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
+
+    .messenger-icon:hover {
+        transform: scale(1.05);
+        background-color: #0069d9;
+    }
+
+
+
+    .messenger-iconenv {
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .messenger-iconenv:hover {
+        transform: scale(1.05);
+        background-color: #0069d9;
+    }
+
+    .unread-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* Container de la messagerie */
+    .messenger-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: 768px) {
+        .messenger-container {
+            width: 700px;
+            height: 600px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .messenger-container {
+            width: 850px;
+            height: 700px;
+        }
+    }
+
+    /* Composant principal de la messagerie */
+    .messenger {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .messenger-sidebar {
+        width: 280px;
+        border-right: 1px solid #e5e5e5;
+        display: flex;
+        flex-direction: column;
+        background-color: #f8f9fa;
+    }
+
+    .sidebar-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sidebar-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .groups-list {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .group-item {
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        position: relative;
+    }
+
+    .group-item:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+    }
+
+    .group-item.active {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .group-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+        background-color: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #495057;
+        font-size: 16px;
+        overflow: hidden;
+    }
+
+    .group-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .default-avatar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #6c757d;
+        color: white;
+        font-weight: bold;
+    }
+
+    .group-info {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .group-name {
+        font-weight: 500;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .group-last-message {
+        font-size: 0.8rem;
+        color: #6c757d;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .messenger-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .select-chat-placeholder {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .messenger-info-sidebar {
+        width: 280px;
+        border-left: 1px solid #e5e5e5;
+        background-color: #f8f9fa;
+        overflow-y: auto;
+    }
+
+    /* Composant de chat de groupe */
+    .group-chat {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .chat-header {
+        padding: 10px 15px;
+        border-bottom: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .messages-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .message {
+        display: flex;
+        margin-bottom: 10px;
+        max-width: 80%;
+    }
+
+    .message-sent {
+        margin-left: auto;
+        flex-direction: row-reverse;
+    }
+
+    .message-received {
+        margin-right: auto;
+    }
+
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin: 0 10px;
+    }
+
+    .user-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .message-content {
+        background-color: #f0f2f5;
+        padding: 8px 12px;
+        border-radius: 18px;
+        position: relative;
+    }
+
+    .message-sent .message-content {
+        background-color: #d1e7ff;
+    }
+
+    .message-header {
+        font-size: 0.7rem;
+        margin-bottom: 2px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .message-user {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .message-time {
+        color: #6c757d;
+        font-size: 0.65rem;
+    }
+
+    .message-text {
+        word-break: break-word;
+    }
+
+    .message-input {
+        padding: 10px 15px;
+        border-top: 1px solid #e5e5e5;
+        background-color: #f8f9fa;
+    }
+
+    /* Composant d'informations sur le groupe */
+    .info-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .group-details {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .group-avatar-large {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+        overflow: hidden;
+    }
+
+    .default-avatar-large {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #6c757d;
+        color: white;
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+    .group-description {
+        color: #6c757d;
+        margin-top: 5px;
+    }
+
+    .invite-section, .members-section {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .search-user {
+        position: relative;
+    }
+
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 10;
+    }
+
+    .search-result-item {
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .search-result-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .user-avatar-small {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+        margin-right: 8px;
+    }
+
+    .no-results {
+        padding: 8px 12px;
+        color: #6c757d;
+        text-align: center;
+    }
+
+    .members-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .member-item {
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .member-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .admin-badge {
+        font-size: 0.7rem;
+        background-color: #ffc107;
+        color: #212529;
+        padding: 2px 5px;
+        border-radius: 10px;
+        margin-left: 5px;
+    }
+
+    .member-actions {
+        display: flex;
+        gap: 5px;
+    }
+
+    .bottom-actions {
+        padding: 15px;
+        text-align: center;
+    }
+
+    /* Composant de gestion des invitations */
+    .invitations-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .invitations-content {
+        padding: 15px;
+    }
+
+    .invitation-item {
+        padding: 15px;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .invitation-details {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .invitation-info {
+        flex: 1;
+    }
+
+    .inviter, .invitation-date {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .invitation-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .no-invitations {
+        text-align: center;
+        color: #6c757d;
+        padding: 20px;
+    }
+
+    /* Composant de création de groupe */
+    .create-group-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .create-group-form {
+        padding: 15px;
+        overflow-y: auto;
+        max-height: calc(100% - 60px);
+    }
+
+    .img-preview {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 5px;
+    }
+
+    .selected-users {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .selected-user {
+        display: flex;
+        align-items: center;
+        background-color: #f0f2f5;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+
+    .btn-remove {
+        background: none;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
 </style>
     @livewireStyles()
   </head>
@@ -678,10 +678,7 @@
     @auth
         @livewire('messenger-icon')
     @endauth
-    @guest
-    @livewire('connect')
-      
-    @endguest
+    
     @php
     setlocale(LC_TIME,'fr_FR.utf8');
                             \Carbon\Carbon::setLocale('fr');
