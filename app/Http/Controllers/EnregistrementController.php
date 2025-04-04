@@ -32,4 +32,7 @@ class EnregistrementController extends Controller
         auth()->user()->savedPosts()->detach($post->id); // Supprimer le post enregistré
         return redirect()->back()->with('success', 'Astuce retiré de vos enregistrements.');
     }
+    public function messs(){
+        return ('dededed');
+    }
 }

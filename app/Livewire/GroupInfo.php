@@ -7,6 +7,7 @@ use App\Models\MessageGroup;
 use App\Models\User;
 use App\Models\Invitation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GroupInfo extends Component
 {
@@ -180,6 +181,48 @@ class GroupInfo extends Component
         $this->group->users()->detach(Auth::id());
         $this->dispatch('refreshGroups');
     }
+
+    public function deleteGroup()
+    {
+        // Vérifier que l'utilisateur est admin
+        if (!$this->isAdmin) {
+            $this->dispatch('notify', [
+                'message' => 'Seul un administrateur peut supprimer le groupe!',
+                'type' => 'error'
+            ]);
+            return;
+        }
+        
+        try {
+            // Utiliser une transaction pour garantir l'intégrité des données
+            DB::transaction(function () {
+                // Récupérer le groupe (pas besoin de charger toutes les relations grâce au cascade)
+                $group = MessageGroup::findOrFail($this->groupId);
+                
+                // Supprimer toutes les invitations liées au groupe
+                Invitation::where('message_group_id', $this->groupId)->delete();
+                
+                // Pas besoin de détacher les users ni supprimer les messages manuellement
+                // car les contraintes 'onDelete cascade' s'en chargent
+                // Supprimer le groupe (cela déclenchera les suppressions en cascade)
+                $group->delete();
+            });
+            
+            // Notifier et rediriger vers Messenger
+            $this->dispatch('notify', [
+                'message' => 'Le groupe a été supprimé avec succès!',
+                'type' => 'success'
+            ]);
+            
+            $this->dispatch('refreshGroups');
+            
+        } catch (\Exception $e) {
+            $this->dispatch('notify', [
+                'message' => 'Une erreur est survenue lors de la suppression du groupe: ' . $e->getMessage(),
+                'type' => 'error'
+            ]);
+        }
+    }    
 
     public function render()
     {

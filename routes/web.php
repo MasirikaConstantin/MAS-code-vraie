@@ -13,10 +13,14 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageUploadController;
-
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NewsController;
-
-
+use Spatie\Sitemap\SitemapGenerator;
+Route::resource("messages",MessageController::class);
+Route::get('/generate-sitemap', function () {
+    SitemapGenerator::create('https://mascodeproduct.com')->writeToFile(public_path('sitemap.xml'));
+    return 'Sitemap généré avec succès !';
+});
 Route::get('/', function () {
     return view('index',[
         'posts'=>Post::orderBy("created_at",'desc')->paginate(8)->where('etat','=',0),"recents"=>Post::orderBy('id','desc')->where('etat','=',0)->limit(3)->get(),
@@ -43,7 +47,7 @@ Route::middleware('rolemanager:utilisateur,admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/modifcomm/{comment}', [ProfileController::class, 'editcomm'])->name('edit.comm');
+    Route::get('/modifcomm/{comment}', [ProfileController::class, 'editcomm']);
     Route::post('/modifcomm/{comment}', [ProfileController::class, 'updatecomm'])->name('edit.comm');
 
 
@@ -196,4 +200,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/enregistrer', [EnregistrementController::class, 'store'])->name('enregistrements.store');
     Route::delete('/enregistrements/{post}', [EnregistrementController::class, 'destroy'])->name('enregistrements.destroy');
 });
+
 

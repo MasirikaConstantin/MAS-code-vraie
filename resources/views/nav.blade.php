@@ -29,6 +29,11 @@
         <li>
           <a href="{{route('user.accueil')}}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Forum</a>
         </li>
+        @auth
+        <li>
+          <a href="{{route('messages.index')}}" class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">Messages</a>
+        </li>
+        @endauth
         <li>
           <a href="{{route('astuces')}}"
             class="block py-2 px-3 text-cyan-400 rounded hover:bg-gray-800/50 hover:text-cyan-300 transition-colors duration-300">

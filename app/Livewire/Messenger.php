@@ -27,12 +27,19 @@ class Messenger extends Component
         'invitationRejected' => 'loadGroups',
         'groupCreated' => 'handleGroupCreated',
         'refreshGroups' => 'loadGroups',
-        'toggle-group-info' => 'handleToggleGroupInfo'
-    ];
-
+        'toggle-group-info' => 'handleToggleGroupInfo',
+        ];
     public function mount()
     {
         $this->loadGroups();
+    }
+    public function resetMessengerState()
+    {
+        // Réinitialiser l'état pour revenir à la vue principale
+        $this->showCreateGroup = false;
+        $this->showInvitations = false;
+        
+        // D'autres réinitialisations selon votre structure
     }
 
     public function handleToggleGroupInfo()

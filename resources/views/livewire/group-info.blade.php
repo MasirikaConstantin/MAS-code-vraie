@@ -114,6 +114,19 @@
             Quitter le groupe
         </button>
     </div>
+    
+    
+    @endif
+
+    @if ($isAdmin && $member->id ==Auth::id())
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700 shrink-0">
+        <button 
+        wire:click="deleteGroup"
+        class="w-full py-2 px-4 mb-2 border border-red-600 bg-red-600 text-white rounded-md hover:bg-red-700 hover:border-red-700 transition-colors"
+    >
+        Supprimer le groupe
+    </button>
+    </div>
     @endif
 
 </div>

@@ -790,32 +790,34 @@
 </style>
 <!-- Begin page content -->
 <main class="flex-shrink-0 mt-6 ">
-
       @if (str_contains($route, 'index'))
-        <div class="class "  >
-            @if($route != 'astuces.new')
-            <div class="  accs" style=" " >
-                @endif
-                  <div class="col-md-12">
-                    <div class=" sss text-body  justify-content-center acc mt-3 ">
-                      <h1 class="h1 text-body" >
-                        <strong>Bienvenu  </strong>
-                      </h1>
-                      <h3 class="" id="monElement" >
-                        
-                      </h3>
+        @if ($route == 'messages.index')
+          
+        @else
+            <div class="class "  >
+                @if($route != 'astuces.new')
+                <div class="  accs" style=" " >
+                    @endif
+                    <div class="col-md-12">
+                        <div class=" sss text-body  justify-content-center acc mt-3 ">
+                        <h1 class="h1 text-body" >
+                            <strong>Bienvenu  </strong>
+                        </h1>
+                        <h3 class="" id="monElement" >
+                            
+                        </h3>
+                        </div>
+                    
                     </div>
-                  
-                  </div>
-              </div>
-            </div>
+                </div>
+                </div>
+                @endif
+
+            @if($route != 'astuces.new')
+                
+                <div class=" container mx-auto mt-6">
             @endif
-
-          @if($route != 'astuces.new')
-            
-            <div class=" container mx-auto mt-6">
           @endif
-
       <div class="mt-6" style="margin-top: 90px" >
         <h1 class="text-4xl font-bold adrks:text-white mt-6 mb-4">@yield('section','')   </h1>
       </div>
@@ -1112,6 +1114,12 @@ if (userId) {
           alert.remove();
       }
   }, 5000);
+</script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <script src="{{asset('prism.js')}}"></script>
