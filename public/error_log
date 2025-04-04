@@ -1,0 +1,18 @@
+[30-Mar-2025 18:25:59 UTC] PHP Warning:  require(/home/mascodep/public_html/vendor/composer/../symfony/translation/Resources/functions.php): Failed to open stream: No such file or directory in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
+[30-Mar-2025 18:25:59 UTC] PHP Warning:  require(/home/mascodep/public_html/vendor/composer/../symfony/translation/Resources/functions.php): Failed to open stream: No such file or directory in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
+[30-Mar-2025 18:25:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/mascodep/public_html/vendor/composer/../symfony/translation/Resources/functions.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/mascodep/public_html/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/mascodep/public_html/vendor/composer/autoload_real.php(45): {closure}('a1105708a18b769...', '/home/mascodep/...')
+#1 /home/mascodep/public_html/vendor/autoload.php(25): ComposerAutoloaderInit39967ed9e89b7f470ed9ae98a0ae4ac7::getLoader()
+#2 /home/mascodep/public_html/public/index.php(34): require('/home/mascodep/...')
+#3 {main}
+  thrown in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
+[04-Apr-2025 10:59:17 UTC] PHP Warning:  require(/home/mascodep/public_html/vendor/composer/../paragonie/sodium_compat/autoload.php): Failed to open stream: No such file or directory in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
+[04-Apr-2025 10:59:17 UTC] PHP Warning:  require(/home/mascodep/public_html/vendor/composer/../paragonie/sodium_compat/autoload.php): Failed to open stream: No such file or directory in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
+[04-Apr-2025 10:59:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/mascodep/public_html/vendor/composer/../paragonie/sodium_compat/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/mascodep/public_html/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/mascodep/public_html/vendor/composer/autoload_real.php(45): {closure}('3109cb1a231dcd0...', '/home/mascodep/...')
+#1 /home/mascodep/public_html/vendor/autoload.php(25): ComposerAutoloaderInit39967ed9e89b7f470ed9ae98a0ae4ac7::getLoader()
+#2 /home/mascodep/public_html/public/index.php(34): require('/home/mascodep/...')
+#3 {main}
+  thrown in /home/mascodep/public_html/vendor/composer/autoload_real.php on line 41
